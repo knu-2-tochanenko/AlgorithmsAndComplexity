@@ -55,9 +55,66 @@ int horspool(string source, string toFind) {
 
 // Boyer Moore ////////////////////////////////////////////////
 int boyerMoore(string source, string toFind) {
+	vector<int> shiftGoodChar(toFind.size() + 1, toFind.size());
+	vector<int> shiftBadChar(256, toFind.size());
+
+	vector<int> sub(toFind.size(), 0);
+	for (int j = 1, maxZidx = 0, maxZ = 0; j < toFind.size(); j++) {
+		if (j <= maxZ)
+			sub[j] = min(maxZ - j + 1, sub[j - maxZidx]);
+		while (j + sub[j] < toFind.size() && source[toFind.size() - 1 - sub[j]] == source[toFind.size() - 1 - (j + sub[j])])
+			sub[j]++;
+		if (j + sub[j] - 1 > maxZ) {
+			maxZidx = j;
+			maxZ = j + sub[j] - 1;
+		}
+	}
+	for (int j = toFind.size() - 1; j > 0; j--)
+		shiftGoodChar[toFind.size() - sub[j]] = j;
+	for (int j = 1, r = 0; j <= toFind.size() - 1; j++)
+		if (j + sub[j] == toFind.size())
+			for (; r <= j; r++)
+				if (shiftGoodChar[r] == toFind.size()) shiftGoodChar[r] = j;
+
+	for (int j = 0; j < toFind.size() - 1; j++)
+		shiftBadChar[(int)toFind[j]] = toFind.size() - j - 1;
+
+	int i = 0;
+	while (i <= (source.size() - toFind.size())) {
+		int j = 0;
+		for (j = toFind.size() - 1; j >= 0 && toFind[j] == source[i + j]; j--);
+		if (j < 0)
+			return i;
+		else
+			i += max((shiftGoodChar[j + 1]), (int)(shiftBadChar[(int)source[i + j]] - toFind.size() + j + 1));
+	}
 	return -1;
 }
 // Boyer Moore ////////////////////////////////////////////////
+
+// KPM ////////////////////////////////////////////////
+int KPM(const string source, const string toFind) {
+	vector<int> sub;
+	sub.resize(toFind.size());
+	sub[0] = 0;
+	for (int i = 1; i < sub.size(); i++) {
+		int pos = sub[i - 1];
+		while (pos > 0 && toFind[pos] != toFind[i])
+			pos = sub[pos - 1];
+		sub[i] = pos + (toFind[pos] == toFind[i] ? 1 : 0);
+	}
+
+	int pos = 0;
+	for (int i = 0; i < source.size(); i++) {
+		while (pos > 0 && (pos >= toFind.size() || toFind[pos] != source[i]))
+			pos = sub[pos - 1];
+		if (source[i] == toFind[pos]) pos++;
+		if (pos == toFind.size())
+			return (i - pos + 1);
+	}
+	return -1;
+}
+// KPM ////////////////////////////////////////////////
 
 // Rabin Karp /////////////////////////////////////////////////
 llong findHash(llong m, llong q) {
@@ -94,13 +151,15 @@ llong rabinKarp(string source, string toFind, int mul) {
 // Rabin Karp /////////////////////////////////////////////////
 int main() {
 	// we can find only lowercase letters
-	string source = "This helllo is the most terrifying helllo in the world.", toFind = "hello";
+	string source = "This helllo is the most terrifying hhelloo in the world.", toFind = "hello";
 	vector<llong> result;
 	int mul = 10;
 	
 	cout << "Naive : " << naiveFind(source, toFind) << endl;
 	cout << "Rabin Karp : " << rabinKarp(source, toFind, mul) << endl;
 	cout << "Horspol : " << horspool(source, toFind) << endl;
+	cout << "Boyer Moore : " << boyerMoore(source, toFind) << endl;
+	cout << "KPM : " << KPM(source, toFind) << endl;
 
 	system("pause");
 	return 0;
