@@ -26,5 +26,8 @@
     <ClInclude Include="hashing.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="grocerystore.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
