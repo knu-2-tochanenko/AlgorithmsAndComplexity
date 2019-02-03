@@ -40,10 +40,13 @@ private:
 			}
 			else if (str[i] == '\n')
 				res.push_back(substr);
+			else if (str[i] == '\0' || str[i] == '\r')
+				continue;
 			else {
 				substr += str[i];
 			}
 		}
+		res.push_back(substr);
 		return res;
 	}
 
@@ -57,6 +60,9 @@ private:
 
 		vector<string> values = breakIntoWords(str);
 
+		for (int i = 0; i < values.size(); i++)
+			cout << values[i] << " ";
+		cout << endl;
 		if (values.size() == 5) {
 			product->category = values[0];
 			product->product->name = values[1];
@@ -79,7 +85,8 @@ public:
 		Category_Product* currentProduct;
 		while (getline(file, line)) {
 			currentProduct = getProduct(line);
-			this->products.push_back(currentProduct);
+			if (currentProduct->category != "\n")
+				this->products.push_back(currentProduct);
 		}
 		this->file.close();
 	}

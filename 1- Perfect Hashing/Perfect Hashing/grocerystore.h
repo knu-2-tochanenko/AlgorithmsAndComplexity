@@ -26,9 +26,26 @@ struct Category {
 	}
 };
 
+string to_string(Product product) {
+	return product.name;
+}
+
+string to_string(Category category) {
+	return category.name;
+}
+
+string to_string(Product* product) {
+	return product->name;
+}
+
+string to_string(Category* category) {
+	return category->name;
+}
+
 class Store {
 private:
 	HashTable<Category*>* categories;
+	vector<string> categoriesNames;
 public:
 	Store(string fileName) {
 		DataFile* file = new DataFile(fileName);
@@ -43,7 +60,7 @@ public:
 			productValues = currentProduct->product;
 
 			//	Add product to category if category exists
-			if (categories->hasElement(currentProduct->category)) {
+			if (find(categoriesNames.begin(), categoriesNames.end(), currentProduct->category) != categoriesNames.end()) {
 				currentCategory = this->categories->getElement(currentProduct->category);
 				currentCategory->add(productValues);
 			}
@@ -52,8 +69,14 @@ public:
 				currentCategory = new Category(currentProduct->category);
 				currentCategory->add(productValues);
 				this->categories->addElement(currentCategory);
+				categoriesNames.push_back(currentProduct->category);
 			}
 		}
+
+		for (int i = 0; i < this->categoriesNames.size(); i++) {
+			this->categories->getElement(this->categoriesNames[i])->products->normalize();
+		}
+		this->categories->normalize();
 	}
 
 	void printCategory(string category) {
@@ -63,15 +86,3 @@ public:
 			cout << "false\n";
 	}
 };
-
-string to_string(Product& product) {
-	return product.name;
-}
-
-string to_string(Category& category) {
-	return category.name;
-}
-
-string to_string(string& str) {
-	return str;
-}
