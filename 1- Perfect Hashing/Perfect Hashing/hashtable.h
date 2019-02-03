@@ -42,12 +42,24 @@ public:
 		Gets element from HashTable. Return type is specified
 		when initializing HashTable.
 	//*/
-	T getElement(T element) {
-		int firstHashValue = firstHash(to_string(element), numberOfElements);
+	T getElement(string element) {
+		int firstHashValue = firstHash(element, numberOfElements);
 		Cell<T>* currentCell;
 		currentCell = this->table[firstHashValue];
-		int secondHashValue = secondHash(to_string(element), currentCell->elements);
+		int secondHashValue = secondHash(element, currentCell->elements);
 		return currentCell[secondHashValue];
+	}
+
+	bool hasElement(string element) {
+		int firstHashValue = firstHash(element, numberOfElements);
+		if (this->table.at(firstHash) == NULL)
+			return false;
+		Cell<T>* currentCell;
+		currentCell = this->table[firstHashValue];
+		int secondHashValue = secondHash(element, currentCell->elements);
+		if (currentCell[secondHash] == NULL)
+			return false;
+		return true;
 	}
 
 	//	CALL THIS FUNCTION TO GENERATE SECOND HASHES!
@@ -62,7 +74,7 @@ public:
 			currentCell->elementsList.reserve(currentCell->elements);
 
 			//	Generate second hashes
-			for (int j = 0; j < currentCell->elements) {
+			for (int j = 0; j < currentCell->elements; j++) {
 				currentCell.elementsList[
 					secondHash(to_string(subElementsList[j]), currentCell->elements)]
 					= subElementsList[j];
