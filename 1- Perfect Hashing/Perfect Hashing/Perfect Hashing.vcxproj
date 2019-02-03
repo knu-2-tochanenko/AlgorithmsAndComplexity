@@ -18,6 +18,15 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="datafile.h" />
+    <ClInclude Include="hash.h" />
+    <ClInclude Include="hashtable.h" />
+    <ClInclude Include="store.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{F3E44C07-3841-47A7-BBC4-093F58AF803E}</ProjectGuid>
@@ -114,15 +123,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="source.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="filebase.h" />
-    <ClInclude Include="grocerystore.h" />
-    <ClInclude Include="hashing.h" />
-    <ClInclude Include="hashtable.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

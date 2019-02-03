@@ -20,16 +20,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="filebase.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="grocerystore.h">
+    <ClInclude Include="datafile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="hashtable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="hashing.h">
+    <ClInclude Include="hash.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="store.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
