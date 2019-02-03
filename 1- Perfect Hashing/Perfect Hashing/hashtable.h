@@ -11,12 +11,7 @@ using namespace std;
 template <typename T>
 class HashTable {
 private:
-	struct Cell {
-		int elements;				//	Number of elements in sublist
-		vector<T> elementsList;		//	Elements with second hash
-	};
-
-	vector<Cell*> table;			//	Main table
+	vector<Cell<T>*> table;			//	Main table
 	int numberOfElements;			//	Number of elements in first list (does not contain
 									//	the number of elements in sublists
 
@@ -43,10 +38,22 @@ public:
 		this->table.at(hash)->elementsList.add(element);
 	}
 
+	/***
+		Gets element from HashTable. Return type is specified
+		when initializing HashTable.
+	//*/
+	T getElement(T element) {
+		int firstHashValue = firstHash(to_string(element), numberOfElements);
+		Cell<T>* currentCell;
+		currentCell = this->table[firstHashValue];
+		int secondHashValue = secondHash(to_string(element), currentCell->elements);
+		return currentCell[secondHashValue];
+	}
+
 	//	CALL THIS FUNCTION TO GENERATE SECOND HASHES!
 	void normalize() {
 		vector<T> subElementsList;	//	List for temporary list
-		Cell* currentCell;			//	Pointer to current cell
+		Cell<T>* currentCell;			//	Pointer to current cell
 		for (int i = 0; i < numberOfElements; i++) {
 			subElementsList.clear();
 			currentCell = this->table[i];

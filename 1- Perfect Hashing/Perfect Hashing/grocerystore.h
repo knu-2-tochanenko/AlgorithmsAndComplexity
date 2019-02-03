@@ -1,6 +1,7 @@
 #pragma once
 
 #include "hashtable.h"
+#include "filebase.h"
 
 #include <iostream>
 #include <string>
@@ -8,23 +9,28 @@
 
 using namespace std;
 
-struct Product {
-	string name;
-	time_t shelfTime;
-	double weight;
-	double cost;
-};
+int MAX_NUMBER_OF_CATEGORIES = 129;
+int MAX_NUMBER_OF_PRODUCTS = 129;
 
 struct Category {
 	string name;
-	HashTable<Product> products;
+	HashTable<Product*>* products;
+
+	Category(string name, vector<Product*> productsList) {
+
+	}
 };
 
 class Store {
 private:
-	HashTable<Category> categories;
+	HashTable<Category*>* categories;
 public:
-	
+	Store(string fileName) {
+		DataFile* file = new DataFile(fileName);
+		categories = new HashTable<Category*>(MAX_NUMBER_OF_CATEGORIES);
+
+		//	TODO Write function
+	}
 };
 
 string to_string(Product& product) {

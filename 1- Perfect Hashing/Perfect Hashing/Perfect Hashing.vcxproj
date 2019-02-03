@@ -121,6 +121,7 @@
     <ClInclude Include="filebase.h" />
     <ClInclude Include="grocerystore.h" />
     <ClInclude Include="hashing.h" />
+    <ClInclude Include="hashtable.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
