@@ -53,16 +53,18 @@ private:
 		Returns Category_Product from string, which includes category name
 		and product properties.
 	//*/
-	Category_Product* getProduct(string str) {
+	Category_Product* getProduct(string str, bool displayData) {
 		pointer = 0;
 		Category_Product* product = new Category_Product();
 		product->product = new Product();
 
 		vector<string> values = breakIntoWords(str);
 
-		for (int i = 0; i < values.size(); i++)
-			cout << values[i] << " ";
-		cout << endl;
+		if (displayData) {
+			for (int i = 0; i < values.size(); i++)
+				cout << values[i] << " ";
+			cout << endl;
+		}
 		if (values.size() == 5) {
 			product->category = values[0];
 			product->product->name = values[1];
@@ -71,13 +73,16 @@ private:
 			product->product->cost = stod(values[4]);
 		}
 		else {
+			HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+			SetConsoleTextAttribute(hConsole, 12);
 			cerr << "E001 : PROBLEM IN PARSING STRING\n";
+			SetConsoleTextAttribute(hConsole, 15);
 		}
 		return product;
 	}
 
 public:
-	DataFile(string fileName) {
+	DataFile(string fileName, bool displayData) {
 		this->file.open(fileName, ifstream::in);
 
 		string line;
@@ -86,7 +91,7 @@ public:
 
 		Category_Product* currentProduct;
 		while (getline(file, line)) {
-			currentProduct = getProduct(line);
+			currentProduct = getProduct(line, displayData);
 			if (currentProduct->category != "\n")
 				this->products.push_back(currentProduct);
 		}

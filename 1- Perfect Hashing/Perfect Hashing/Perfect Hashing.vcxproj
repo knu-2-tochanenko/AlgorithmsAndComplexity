@@ -22,6 +22,7 @@
     <ClCompile Include="source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="commandline.h" />
     <ClInclude Include="datafile.h" />
     <ClInclude Include="hash.h" />
     <ClInclude Include="hashtable.h" />

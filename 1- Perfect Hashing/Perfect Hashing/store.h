@@ -10,7 +10,7 @@
 
 using namespace std;
 
-int MAX_NUMBER_OF_PRODUCTS = 15;
+int MAX_NUMBER_OF_PRODUCTS = 4999;
 
 struct Category {
     string name;
@@ -21,8 +21,8 @@ struct Category {
 		this->products = new HashTable(MAX_NUMBER_OF_PRODUCTS);
 	}
 
-	void add(Product* product) {
-		this->products->addElement(product);
+	void add(Product* product, bool displayDebug) {
+		this->products->addElement(product, displayDebug);
 	}
 };
 
@@ -32,8 +32,8 @@ private:
 	map<string, int> category;
 	vector<string> categoriesList;
 public:
-	Store(string fileName) {
-		DataFile* file = new DataFile(fileName);
+	Store(string fileName, bool displayData, bool displayDebug) {
+		DataFile* file = new DataFile(fileName, displayData);
 		Category_Product* categoryProduct;
 		categoriesList = file->getCategories();
 
@@ -49,21 +49,38 @@ public:
 		for (int i = 0; i < numberOfProducts; i++) {
 			categoryProduct = file->getProduct(i);
 			catalog[category[categoryProduct->category]]
-				->add(categoryProduct->product);
+				->add(categoryProduct->product, displayDebug);
 		}
 	}
 
 	void printProduct(string categoryName, string productName) {
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		int selectedCategory = category[categoryName];
 		Product* selectedProduct = this->catalog[selectedCategory]->products->getElement(productName);
-		if (selectedProduct != NULL) {
-			cout << "\tNAME\t:\t" << selectedProduct->name << "\n";
-			cout << "\texpdate\t:\t" << selectedProduct->daysTillExpired << "\n";
-			cout << "\tweight\t:\t" << selectedProduct->weight << " kg\n";
-			cout << "\tcost\t:\t$" << selectedProduct->cost << "\n";
+		if ((selectedProduct != NULL) && (category.find(categoryName) != category.end())) {
+			SetConsoleTextAttribute(hConsole, 10);
+			cout << "------------------\nNAME     :  ";
+			SetConsoleTextAttribute(hConsole, 11);
+			cout << selectedProduct->name << "\n";
+			SetConsoleTextAttribute(hConsole, 10);
+			cout << "expdate  :  ";
+			SetConsoleTextAttribute(hConsole, 15);
+			cout << selectedProduct->daysTillExpired << "\n";
+			SetConsoleTextAttribute(hConsole, 10);
+			cout << "weight   :  ";
+			SetConsoleTextAttribute(hConsole, 15);
+			cout << selectedProduct->weight << " kg\n";
+			SetConsoleTextAttribute(hConsole, 10);
+			cout << "cost     :  ";
+			SetConsoleTextAttribute(hConsole, 15);
+			cout << "$" << selectedProduct->cost << "\n";
+			SetConsoleTextAttribute(hConsole, 10);
+			cout << "------------------\n";
 		}
 		else {
+			SetConsoleTextAttribute(hConsole, 12);
 			cout << "There is no " << productName << " in " << categoryName << endl;
+			SetConsoleTextAttribute(hConsole, 15);
 		}
 	}
 };
