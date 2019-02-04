@@ -10,7 +10,7 @@
 
 using namespace std;
 
-int MAX_NUMBER_OF_PRODUCTS = 4999;
+int MAX_NUMBER_OF_PRODUCTS = 3571;
 
 struct Category {
     string name;
@@ -40,13 +40,13 @@ public:
 		//	Create map for easier work with categories
 		//	& add all categories to catalog
 		catalog.resize(categoriesList.size());
-		for (int i = 0; i < categoriesList.size(); i++) {
+		for (unsigned int i = 0; i < categoriesList.size(); i++) {
 			category[categoriesList[i]] = i;
 			catalog[i] = new Category(categoriesList[i]);
 		}
 
-		int numberOfProducts = file->numberOfProducts();
-		for (int i = 0; i < numberOfProducts; i++) {
+		unsigned int numberOfProducts = file->numberOfProducts();
+		for (unsigned int i = 0; i < numberOfProducts; i++) {
 			categoryProduct = file->getProduct(i);
 			catalog[category[categoryProduct->category]]
 				->add(categoryProduct->product, displayDebug);

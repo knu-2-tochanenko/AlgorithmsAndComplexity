@@ -16,7 +16,7 @@ struct Cell {
 	int multiplier;
     vector<Product*> productsList;
 
-    Product* operator[](int n) {
+    Product* operator[](unsigned int n) {
         if (n >= productsList.size())
             return NULL;
         return productsList[n];
@@ -76,7 +76,7 @@ public:
 
 			//	Attempting to use second hash
 			unsigned int secondHashValue;
-			for (int i = 0; i < tempList.size(); i++) {
+			for (unsigned int i = 0; i < tempList.size(); i++) {
 				secondHashValue = secondHash(tempList[i]->name, squareSize, prime[currentPrime]);
 				if (cell->productsList[secondHashValue] != NULL) {
 					//	Check another prime number

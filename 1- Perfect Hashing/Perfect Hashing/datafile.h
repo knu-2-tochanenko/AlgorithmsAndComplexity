@@ -29,7 +29,7 @@ private:
 	vector<string> breakIntoWords(string str) {
 		vector<string> res;
 		string substr;
-		for (int i = 0; i < str.length(); i++) {
+		for (unsigned int i = 0; i < str.length(); i++) {
 			if (str[i] == '\t') {
 				res.push_back(substr);
 				substr = "";
@@ -61,7 +61,7 @@ private:
 		vector<string> values = breakIntoWords(str);
 
 		if (displayData) {
-			for (int i = 0; i < values.size(); i++)
+			for (unsigned int i = 0; i < values.size(); i++)
 				cout << values[i] << " ";
 			cout << endl;
 		}
@@ -84,6 +84,12 @@ private:
 public:
 	DataFile(string fileName, bool displayData) {
 		this->file.open(fileName, ifstream::in);
+
+		if (file.fail()) {
+			cout << "ERROR!\n";
+			system("pause");
+			exit(0);
+		}
 
 		string line;
 		getline(file, line);			//	Get categories names

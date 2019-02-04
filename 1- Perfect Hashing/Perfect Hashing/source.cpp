@@ -4,7 +4,6 @@
 int main() {
 	CommandLine commandLine;
 	commandLine.run();
-	
 
 	system("pause");
 	return 0;
