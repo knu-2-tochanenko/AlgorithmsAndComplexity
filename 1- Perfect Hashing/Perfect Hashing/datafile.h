@@ -30,16 +30,16 @@ private:
 		vector<string> res;
 		string substr;
 		for (unsigned int i = 0; i < str.length(); i++) {
-			if (str[i] == '\t') {
-				res.push_back(substr);
-				substr = "";
+			if (str[i] == ',') {
+				if (substr != "") {
+					res.push_back(substr);
+					substr = "";
+				}
 			}
 			else if (str[i] == '\n') {
 				if (substr != "")
 					res.push_back(substr);
 			}
-			else if (str[i] == '\0' || str[i] == '\r')
-				continue;
 			else {
 				substr += str[i];
 			}
@@ -67,6 +67,11 @@ private:
 		}
 		if (values.size() == 5) {
 			product->category = values[0];
+
+			//	Add category to category list
+			if (find(this->categories.begin(), this->categories.end(), product->category) == this->categories.end())
+				this->categories.push_back(product->category);
+
 			product->product->name = values[1];
 			product->product->daysTillExpired = stoi(values[2]);
 			product->product->weight = stod(values[3]);
@@ -92,8 +97,7 @@ public:
 		}
 
 		string line;
-		getline(file, line);			//	Get categories names
-		this->categories = breakIntoWords(line);
+		getline(file, line);			//	Get header
 
 		Category_Product* currentProduct;
 		while (getline(file, line)) {

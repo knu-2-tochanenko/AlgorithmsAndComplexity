@@ -10,7 +10,7 @@
 
 using namespace std;
 
-int MAX_NUMBER_OF_PRODUCTS = 3571;
+int MAX_NUMBER_OF_PRODUCTS = 3000;
 
 struct Category {
     string name;
@@ -79,8 +79,13 @@ public:
 		}
 		else {
 			SetConsoleTextAttribute(hConsole, 12);
-			cout << "There is no " << productName << " in " << categoryName << endl;
+			cout << "There is no ";
 			SetConsoleTextAttribute(hConsole, 15);
+			cout << productName;
+			SetConsoleTextAttribute(hConsole, 12);
+			cout << " in ";
+			SetConsoleTextAttribute(hConsole, 15);
+			cout << categoryName << endl;
 		}
 	}
 };

@@ -9,8 +9,6 @@
 
 using namespace std;
 
-int prime[58] = { 17, 19, 23, 29, 31, 37, 41, 43, 47,  53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311 };
-
 struct Cell {
     int elements;
 	int multiplier;
@@ -67,7 +65,7 @@ public:
 		bool hadCollision = false;
 		//	Debug information
 		int numberOfIterations = 0;
-		int currentPrime = 0;
+		int currentPrime = 17;
 		while (hasCollision) {
 			hasCollision = false;
 			//  Clear main list and resize it to fit n*n values
@@ -77,7 +75,7 @@ public:
 			//	Attempting to use second hash
 			unsigned int secondHashValue;
 			for (unsigned int i = 0; i < tempList.size(); i++) {
-				secondHashValue = secondHash(tempList[i]->name, squareSize, prime[currentPrime]);
+				secondHashValue = secondHash(tempList[i]->name, squareSize, currentPrime);
 				if (cell->productsList[secondHashValue] != NULL) {
 					//	Check another prime number
 					currentPrime++;
@@ -88,7 +86,7 @@ public:
 						cout << "COLLISION IN   ";
 						cout << tempList[i]->name << "   AND   " << cell->productsList[secondHashValue]->name;
 						SetConsoleTextAttribute(hConsole, 15);
-						cout << "  Attempting value " << prime[currentPrime] << endl;
+						cout << "  Attempting value " << currentPrime << endl;
 					}
 					hasCollision = true;
 					hadCollision = true;
@@ -102,7 +100,7 @@ public:
 				SetConsoleTextAttribute(hConsole, 15);
 			}
         }
-		cell->multiplier = prime[currentPrime];
+		cell->multiplier = currentPrime;
     }
 
     /***
