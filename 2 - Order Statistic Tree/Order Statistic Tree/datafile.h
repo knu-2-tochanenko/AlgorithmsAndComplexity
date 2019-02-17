@@ -8,17 +8,17 @@
 
 using namespace std;
 
-//	Temporary structure to get values
-struct Category_Product {
-	string category;
-	Product* product;
-};
-
 struct Product {
 	string name;			//	The name of product
 	int daysTillExpired;	//	Number of days when product is fresh
 	double weight;			//	[kg]	The regular weight of product
 	double price;			//	[$]		Recommended cost of product
+};
+
+//	Temporary structure to get values
+struct Category_Product {
+	string category;
+	Product* product;
 };
 
 class DataFile {

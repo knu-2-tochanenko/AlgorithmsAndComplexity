@@ -29,5 +29,8 @@
     <ClInclude Include="rbtree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="commandline.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

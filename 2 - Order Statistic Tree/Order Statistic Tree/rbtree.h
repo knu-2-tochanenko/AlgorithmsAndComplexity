@@ -31,6 +31,8 @@ struct Node {
 		this->left = left;
 		this->right = right;
 		this->parent = parent;
+
+		size = 1;
 	}
 };
 
@@ -38,11 +40,14 @@ class RBTree {
 private:
 
 	Node* nil = new Node(black, true, NULL, NULL, NULL, NULL);
-	Node* head = new Node(black, false, NULL, NULL, NULL, nil);
+	Node* head = new Node(black, false, NULL, nil, nil, nil);
 
 	void rotateLeft(Node* node) {
 		Node* sub = node->right;
 		node->right = sub->left;
+
+		sub->size = node->size;
+		node->size = node->left->size + node->right->size + 1;
 
 		if (sub->left != nil)
 			sub->left->parent = node;
@@ -62,6 +67,9 @@ private:
 	void rotateRight(Node* node) {
 		Node* sub = node->left;
 		node->left = sub->right;
+
+		sub->size = node->size;
+		node->size = node->left->size + node->right->size + 1;
 
 		if (sub->right != nil)
 			sub->right->parent = node;
@@ -101,6 +109,8 @@ private:
 			}
 			else {
 				sub = node->parent->parent->left;
+				if (sub == nil || sub == NULL)
+					return;
 				if (sub->color == red) {
 					node->parent->color = black;
 					sub->color = black;
@@ -121,11 +131,49 @@ private:
 		head->color = black;
 	}
 
+	Node* getElement(Node* node, int rang) {
+		if (node == nil)
+			return node;
+		int sub = (node->left->size + 1);
+		if (rang == sub)
+			return node;
+		else if (rang < sub)
+			return getElement(node->left, rang);
+		else
+			return getElement(node->right, rang - sub);
+	}
+
+	void displayNode(Node* node) {
+		cout << node->price() << "-" << node->size;
+		cout << " { ";
+		if (node->left != nil)
+			displayNode(node->left);
+		cout << " | ";
+		if (node->right != nil)
+			displayNode(node->right);
+		cout << " } ";
+	}
+
 public:
 
-	// TODO :: getElement()
+	RBTree() {
+		nil->left = nil;
+		nil->right = nil;
+		nil->parent = nil;
+		nil->size = 0;
+	}
+
+	Product* getElement(int rang) {
+		return getElement(head, rang)->key;
+	}
+
 	void addElement(Product* product) {
-		Node* node = new Node(red, false, product, NULL, NULL, NULL);
+		Node* node = new Node(red, false, product, nil, nil, nil);
+
+		if (head->key == NULL) {
+			head = node;
+			return;
+		}
 		
 		Node *sub = nil, *point = head;
 		while (point != nil) {
@@ -149,5 +197,16 @@ public:
 		node->right = nil;
 
 		addNormalize(node);
+
+		Node* added = node->parent;
+		while (added != nil) {
+			added->size++;
+			added = added->parent;
+		}
+	}
+
+	void displayTree() {
+		cout.precision(2);
+		displayNode(head);
 	}
 };

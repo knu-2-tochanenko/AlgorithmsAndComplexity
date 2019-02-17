@@ -118,6 +118,7 @@
     <ClCompile Include="source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="commandline.h" />
     <ClInclude Include="datafile.h" />
     <ClInclude Include="rbtree.h" />
     <ClInclude Include="store.h" />
