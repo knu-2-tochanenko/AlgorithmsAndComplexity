@@ -1,13 +1,15 @@
 #pragma once
 
 #include "datafile.h"
-
 #include <iostream>
 
 using namespace std;
 
 enum Color { black, red };
 
+/***
+	Struct which has all needed fields for Order Statistics Tree
+//*/
 struct Node {
 	Color color;
 	bool isNil;
@@ -38,10 +40,16 @@ struct Node {
 
 class RBTree {
 private:
-
+	/***
+		nil - element which is a child for every leaf and a parent for head
+		head - a head of the tree
+	//*/
 	Node* nil = new Node(black, true, NULL, NULL, NULL, NULL);
 	Node* head = new Node(black, false, NULL, nil, nil, nil);
 
+	/***
+		Actually, rotates left
+	//*/
 	void rotateLeft(Node* node) {
 		Node* sub = node->right;
 		node->right = sub->left;
@@ -64,6 +72,9 @@ private:
 		node->parent = sub;
 	}
 
+	/***
+		Actually, rotates right
+	//*/
 	void rotateRight(Node* node) {
 		Node* sub = node->left;
 		node->left = sub->right;
@@ -86,6 +97,9 @@ private:
 		node->parent = sub;
 	}
 
+	/***
+		The method which NEEDS to be executed after EACH element adding
+	//*/
 	void addNormalize(Node * node) {
 		Node *sub;
 		while (node->parent->color == red) {
@@ -131,6 +145,9 @@ private:
 		head->color = black;
 	}
 
+	/***
+		Method which is used to go through the whole tree
+	//*/
 	Node* getElement(Node* node, int rang) {
 		if (node == nil)
 			return node;
@@ -143,6 +160,9 @@ private:
 			return getElement(node->right, rang - sub);
 	}
 
+	/***
+		Displays individual node (using fancy colors)
+	//*/
 	void displayNode(Node* node, int colorMode) {
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		SetConsoleTextAttribute(hConsole, colorMode);
@@ -163,7 +183,10 @@ private:
 	}
 
 public:
-
+	/***
+		Constructor. Setting nil's is CRUICIAL for this tree to work.
+		Note, that nil->size is NEEDS to be 0
+	//*/
 	RBTree() {
 		nil->left = nil;
 		nil->right = nil;
@@ -171,10 +194,16 @@ public:
 		nil->size = 0;
 	}
 
+	/***
+		Method which is used to get element with specific key (by rank)
+	//*/
 	Product* getElement(int rang) {
 		return getElement(head, rang)->key;
 	}
 
+	/***
+		Methods which is used to add new node to the tree
+	//*/
 	void addElement(Product* product) {
 		Node* node = new Node(red, false, product, nil, nil, nil);
 
@@ -213,6 +242,9 @@ public:
 		}
 	}
 
+	/***
+		Displays full tree
+	//*/
 	void displayTree() {
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		displayNode(head, 9);
