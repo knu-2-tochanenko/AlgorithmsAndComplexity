@@ -17,22 +17,29 @@ public:
 		cout << "Give me the name of the file with database : ";
 		SetConsoleTextAttribute(hConsole, 15);
 		cin >> fileName;
-//		fileName = "small.csv";
 
 		SetConsoleTextAttribute(hConsole, 14);
-		cout << "Do you want to see export progress? Y/N : ";
+		cout << "Do you want to see export process? Y/N : ";
 		SetConsoleTextAttribute(hConsole, 15);
 		char yn;
 		cin >> yn;
-//		yn = 'Y';
 
-		bool displayData = false;
+		SetConsoleTextAttribute(hConsole, 14);
+		cout << "Do you want to see trees? Y/N : ";
+		SetConsoleTextAttribute(hConsole, 15);
+		char yn2;
+		cin >> yn2;
+
+		bool displayImport = false;
 		if (yn == 'Y')
-			displayData = true;
+			displayImport = true;
+		bool displayTrees = false;
+		if (yn2 == 'Y')
+			displayTrees = true;
 
-		Store store(fileName, displayData);
+		Store store(fileName, displayImport);
 
-		if (displayData)
+		if (displayTrees)
 			store.printTrees();
 
 		SetConsoleTextAttribute(hConsole, 14);

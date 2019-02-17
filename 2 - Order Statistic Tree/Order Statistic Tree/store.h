@@ -56,6 +56,12 @@ public:
 	void printProduct(string categoryName, int rang) {
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		int selectedCategory = category[categoryName];
+		if (rang == 0) {
+			SetConsoleTextAttribute(hConsole, 12);
+			cout << "The numeration is starts from 0!\n";
+			SetConsoleTextAttribute(hConsole, 15);
+			return;
+		}
 		Product* selectedProduct = this->catalog[selectedCategory]->products->getElement(rang);
 		if ((selectedProduct != NULL) && (category.find(categoryName) != category.end())) {
 			SetConsoleTextAttribute(hConsole, 10);
@@ -73,19 +79,14 @@ public:
 			SetConsoleTextAttribute(hConsole, 10);
 			cout << "cost     :  ";
 			SetConsoleTextAttribute(hConsole, 15);
-			cout << "$" << selectedProduct->price << "\n";
+			printf("$%.2f\n", selectedProduct->price);
 			SetConsoleTextAttribute(hConsole, 10);
 			cout << "------------------\n";
 		}
 		else {
 			SetConsoleTextAttribute(hConsole, 12);
-			cout << "There is no ";
+			cout << "The inputed number is too high!\n";
 			SetConsoleTextAttribute(hConsole, 15);
-			cout << rang;
-			SetConsoleTextAttribute(hConsole, 12);
-			cout << " in ";
-			SetConsoleTextAttribute(hConsole, 15);
-			cout << categoryName << endl;
 		}
 	}
 

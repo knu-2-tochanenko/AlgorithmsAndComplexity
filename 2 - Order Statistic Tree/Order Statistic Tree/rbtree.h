@@ -143,15 +143,23 @@ private:
 			return getElement(node->right, rang - sub);
 	}
 
-	void displayNode(Node* node) {
-		cout << node->price() << "-" << node->size;
-		cout << " { ";
+	void displayNode(Node* node, int colorMode) {
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		SetConsoleTextAttribute(hConsole, colorMode);
+		printf("%.2f", node->price());
+		cout << "-" << node->size;
+		if (node->left != nil || node->right != nil)
+			cout << " { ";
 		if (node->left != nil)
-			displayNode(node->left);
-		cout << " | ";
+			displayNode(node->left, colorMode == 15 ? 9 : colorMode + 1);
+		SetConsoleTextAttribute(hConsole, colorMode);
+		if (node->left != nil || node->right != nil)
+			cout << " | ";
 		if (node->right != nil)
-			displayNode(node->right);
-		cout << " } ";
+			displayNode(node->right, colorMode == 15 ? 9 : colorMode + 1);
+		SetConsoleTextAttribute(hConsole, colorMode);
+		if (node->left != nil || node->right != nil)
+			cout << " } ";
 	}
 
 public:
@@ -206,7 +214,8 @@ public:
 	}
 
 	void displayTree() {
-		cout.precision(2);
-		displayNode(head);
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		displayNode(head, 9);
+		SetConsoleTextAttribute(hConsole, 15);
 	}
 };
