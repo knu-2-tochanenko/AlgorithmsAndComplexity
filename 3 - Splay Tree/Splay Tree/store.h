@@ -16,9 +16,9 @@ struct Category {
 	string name;
 	SplayTree* products;
 
-	Category(string name) {
+	Category(string name, int mode) {
 		this->name = name;
-		this->products = new SplayTree();
+		this->products = new SplayTree(mode);
 	}
 
 	void add(Product* product) {
@@ -32,7 +32,7 @@ private:
 	map<string, int> category;
 	vector<string> categoriesList;
 public:
-	Store(string fileName, bool displayData) {
+	Store(string fileName, int mode, bool displayData) {
 		DataFile* file = new DataFile(fileName, displayData);
 		Category_Product* categoryProduct;
 		categoriesList = file->getCategories();
@@ -42,7 +42,7 @@ public:
 		catalog.resize(categoriesList.size());
 		for (unsigned int i = 0; i < categoriesList.size(); i++) {
 			category[categoriesList[i]] = i;
-			catalog[i] = new Category(categoriesList[i]);
+			catalog[i] = new Category(categoriesList[i], mode);
 		}
 
 		unsigned int numberOfProducts = file->numberOfProducts();
@@ -53,16 +53,11 @@ public:
 		}
 	}
 
-	void printProduct(string categoryName, int rang) {
+	void printProduct(string categoryName, Product* productToFind) {
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		int selectedCategory = category[categoryName];
-		if (rang == 0) {
-			SetConsoleTextAttribute(hConsole, 12);
-			cout << "The numeration is starts from 0!\n";
-			SetConsoleTextAttribute(hConsole, 15);
-			return;
-		}
-		Product* selectedProduct = this->catalog[selectedCategory]->products->getElement(rang);
+		
+		Product* selectedProduct = this->catalog[selectedCategory]->products->getElement(productToFind);
 		if ((selectedProduct != NULL) && (category.find(categoryName) != category.end())) {
 			SetConsoleTextAttribute(hConsole, 10);
 			cout << "------------------\nNAME     :  ";

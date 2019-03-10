@@ -13,6 +13,19 @@ struct Product {
 	int daysTillExpired;	//	Number of days when product is fresh
 	double weight;			//	[kg]	The regular weight of product
 	double price;			//	[$]		Recommended cost of product
+
+	bool operator+(Product& p) {
+		//	CHANGE THIS FUNCTION IN ORDER TO USE SORTING BY ANOTHER PARAMETER IN STRUCTURE
+		return this->price < p.price;
+	}
+
+	Product() = default;
+	Product(string name, int daysTillExpired, double weight, double price) {
+		this->name = name;
+		this->daysTillExpired = daysTillExpired;
+		this->weight = weight;
+		this->price = price;
+	}
 };
 
 //	Temporary structure to get values

@@ -6,11 +6,13 @@
 #include <string>
 #include <windows.h>
 
+#include <typeinfo>
+
 using namespace std;
 
 class CommandLine {
 public:
-	void run() {
+	void run(int mode) {
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		string fileName;
 		SetConsoleTextAttribute(hConsole, 14);
@@ -37,7 +39,7 @@ public:
 		if (yn2 == 'Y')
 			displayTrees = true;
 
-		Store store(fileName, displayImport);
+		Store store(fileName, mode, displayImport);
 
 		if (displayTrees)
 			store.printTrees();
@@ -51,10 +53,32 @@ public:
 			char category[100];
 			cout << "category  :  ";
 			cin >> category;
-			cout << "product   :  ";
-			int rang;
-			cin >> rang;
-			store.printProduct(category, rang);
+			cout << "value   :  ";
+			int integer;
+			double dbl;
+			string str;
+
+						//	1	:	Name
+						//	2	:	Days till expired
+						//	3	:	Weight
+						//	0..	:	Price
+
+			if (mode == 1) {
+				cin >> str;
+				store.printProduct(category, new Product(str, 0, 0, 0));
+			}
+			else if (mode == 2) {
+				cin >> integer;
+				store.printProduct(category, new Product("", integer, 0, 0));
+			}
+			else if (mode == 3) {
+				cin >> dbl;
+				store.printProduct(category, new Product("", 0, dbl, 0));
+			}
+			else {
+				cin >> dbl;
+				store.printProduct(category, new Product("", 0, 0, dbl));
+			}
 		}
 	}
 };

@@ -30,12 +30,33 @@ struct Node {
 class SplayTree {
 private:
 	Node* head = new Node(NULL, NULL, NULL, NULL);
-
+	int mode = 0;		//	1	:	Name
+						//	2	:	Days till expired
+						//	3	:	Weight
+						//	0..	:	Price
 	int treeSize = 0;
 
-	//	TODO :: Create compare funciton
-	int compare(product* )
+	/***
+		Compares two elements using specific mode
+	//*/
+	bool compare(Product* x, Product* y) {
+		if (x == NULL || y == NULL)
+			return false;
+		switch (mode) {
+		case 1:
+			return (x->name < y->name);
+		case 2:
+			return (x->daysTillExpired < y->daysTillExpired);
+		case 3:
+			return (x->weight < y->weight);
+		default:
+			return (x->price < y->price);
+		}
+	}
 
+	/***
+		Rotates left
+	//*/
 	void rotateLeft(Node *node) {
 		Node *sub = node->right;
 		if (sub != NULL) {
@@ -56,6 +77,9 @@ private:
 		node->parent = sub;
 	}
 
+	/***
+		Actually rotates right
+	//*/
 	void rotateRight(Node *node) {
 		Node *sub = node->left;
 		if (sub != NULL) {
@@ -75,6 +99,9 @@ private:
 		node->parent = sub;
 	}
 
+	/***
+		Normalizes tree
+	//*/
 	void splay(Node *node) {
 		while (node->parent) {
 			if (!node->parent->parent) {
@@ -100,17 +127,6 @@ private:
 		}
 	}
 
-	void replace(Node *node, Node *second) {
-		if (!node->parent)
-			head = second;
-		else if (node == node->parent->left)
-			node->parent->left = second;
-		else
-			node->parent->right = second;
-		if (second != NULL)
-			second->parent = node->parent;
-	}
-
 	Node* subMinimum(Node *node) {
 		while (node->left) node = node->left;
 		return node;
@@ -122,15 +138,21 @@ private:
 	}
 
 public:
-	SplayTree() { }
+	/***
+		You NEED to chose which mode to use
+	//*/
+	SplayTree(int mode) { this->mode = mode;  }
 
+	/***
+		Adds element to the tree
+	//*/
 	void addElement(Product *key) {
 		Node *sub = head;
 		Node *sub2 = NULL;
 
-		while (sub) {
+		while (sub != NULL) {
 			sub2 = sub;
-			if (sub->price < key->price)
+			if (compare(sub->key, key))
 				sub = sub->right;
 			else
 				sub = sub->left;
@@ -141,7 +163,7 @@ public:
 
 		if (sub2 == NULL)
 			head = sub;
-		else if (sub2->key->price < sub->key->price)
+		else if (compare(sub2->key, sub->key))
 			sub2->right = sub;
 		else
 			sub2->left = sub;
@@ -150,56 +172,39 @@ public:
 		treeSize++;
 	}
 
-	Node* getElement(Product* key) {
+	/***
+		Use this function to find element with specific
+		values. Note, that key will be created in the "store" class
+	//*/
+	Product* getElement(Product* key) {
 		Node *sub = head;
 		while (sub != NULL) {
-			if (sub->key->price < key->price)
+			if (compare(sub->key, key))
 				sub = sub->right;
-			else if (key->price < sub->key->price)
+			else if (compare(key, sub->key))
 				sub = sub->left;
 			else
-				return sub;
+				return sub->key;
 		}
 		return nullptr;
-	}
-
-	void erase(Product* key) {
-		Node *z = getElement(key);
-		if (!z) return;
-
-		splay(z);
-
-		if (!z->left)
-			replace(z, z->right);
-		else if (!z->right)
-			replace(z, z->left);
-		else {
-			Node *y = subMinimum(z->right);
-			if (y->parent != z) {
-				replace(y, y->right);
-				y->right = z->right;
-				y->right->parent = y;
-			}
-			replace(z, y);
-			y->left = z->left;
-			y->left->parent = y;
-		}
-
-		delete z;
-		treeSize--;
 	}
 
 	/***
 		Displays full tree
 	//*/
 	void displayTree() {
-		
+		// TODO : Write function
 	}
 
+	/***
+		Returns minimum value in the tree
+	//*/
 	Product* minimum() {
 		return subMinimum(head)->key;
 	}
-
+	/***
+		Returns maximum value in the tree
+	//*/
 	Product* maximum() {
 		return subMaximum(head)->key;
 	}
