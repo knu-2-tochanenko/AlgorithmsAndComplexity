@@ -53,11 +53,16 @@ public:
 		}
 	}
 
-	void printProduct(string categoryName, Product* productToFind) {
+	bool printProduct(string categoryName, Product* productToFind) {
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		int selectedCategory = category[categoryName];
 		
-		Product* selectedProduct = this->catalog[selectedCategory]->products->getElement(productToFind);
+		Node* res = this->catalog[selectedCategory]->products->getElement(productToFind);
+		if (!res) {
+			cout << "Oopsie\n";
+			return false;
+		}
+		Product* selectedProduct = res->key;
 		if ((selectedProduct != NULL) && (category.find(categoryName) != category.end())) {
 			SetConsoleTextAttribute(hConsole, 10);
 			cout << "------------------\nNAME     :  ";
@@ -83,12 +88,14 @@ public:
 			cout << "The inputed number is too high!\n";
 			SetConsoleTextAttribute(hConsole, 15);
 		}
+
+		return true;
 	}
 
-	void printTrees() {
+	void printTrees(int mode) {
 		for (int i = 0; i < catalog.size(); i++) {
 			cout << catalog[i]->name << "\n";
-			catalog[i]->products->displayTree();
+			catalog[i]->products->displayTree(mode);
 			cout << "\n\n";
 		}
 	}

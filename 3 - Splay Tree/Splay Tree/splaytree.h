@@ -29,12 +29,11 @@ struct Node {
 
 class SplayTree {
 private:
-	Node* head = new Node(NULL, NULL, NULL, NULL);
+	Node* head = NULL;
 	int mode = 0;		//	1	:	Name
 						//	2	:	Days till expired
 						//	3	:	Weight
 						//	0..	:	Price
-	int treeSize = 0;
 
 	/***
 		Compares two elements using specific mode
@@ -59,21 +58,16 @@ private:
 	//*/
 	void rotateLeft(Node *node) {
 		Node *sub = node->right;
-		if (sub != NULL) {
-			sub->right = sub->left;
-			if (sub->left)
-				sub->left->parent = node;
+		if (sub) {
+			node->right = sub->left;
+			if (sub->left) sub->left->parent = node;
 			sub->parent = node->parent;
 		}
 
-		if (!node->parent)
-			head = sub;
-		else if (node == node->parent->left)
-			node->parent->left = sub;
-		else
-			node->parent->right = sub;
-		if (sub != NULL)
-			sub->left = node;
+		if (!node->parent) head = sub;
+		else if (node == node->parent->left) node->parent->left = sub;
+		else node->parent->right = sub;
+		if (sub) sub->left = node;
 		node->parent = sub;
 	}
 
@@ -82,20 +76,15 @@ private:
 	//*/
 	void rotateRight(Node *node) {
 		Node *sub = node->left;
-		if (sub != NULL) {
+		if (sub) {
 			node->left = sub->right;
-			if (sub->right)
-				sub->right->parent = node;
+			if (sub->right) sub->right->parent = node;
 			sub->parent = node->parent;
 		}
-		if (!node->parent)
-			head = sub;
-		else if (node == node->parent->left)
-			node->parent->left = sub;
-		else
-			node->parent->right = sub;
-		if (sub != NULL)
-			sub->right = node;
+		if (!node->parent) head = sub;
+		else if (node == node->parent->left) node->parent->left = sub;
+		else node->parent->right = sub;
+		if (sub) sub->right = node;
 		node->parent = sub;
 	}
 
@@ -104,10 +93,12 @@ private:
 	//*/
 	void splay(Node *node) {
 		while (node->parent) {
+			// Zig
 			if (!node->parent->parent) {
 				if (node->parent->left == node) rotateRight(node->parent);
 				else rotateLeft(node->parent);
 			}
+			// Zig-Zig
 			else if (node->parent->left == node && node->parent->parent->left == node->parent) {
 				rotateRight(node->parent->parent);
 				rotateRight(node->parent);
@@ -116,6 +107,7 @@ private:
 				rotateLeft(node->parent->parent);
 				rotateLeft(node->parent);
 			}
+			// Zig-Zag
 			else if (node->parent->left == node && node->parent->parent->right == node->parent) {
 				rotateRight(node->parent);
 				rotateLeft(node->parent);
@@ -127,14 +119,49 @@ private:
 		}
 	}
 
-	Node* subMinimum(Node *node) {
+	Node* minimumSubtree(Node *node) {
 		while (node->left) node = node->left;
 		return node;
 	}
 
-	Node* subMaximum(Node *node) {
+	Node* maximumSubtree(Node *node) {
 		while (node->right) node = node->right;
 		return node;
+	}
+
+	/***
+		Displays individual node (using fancy colors)
+	//*/
+	void displayNode(int mode, Node* node, int colorMode) {
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		SetConsoleTextAttribute(hConsole, colorMode);
+		cout << node->key->name;
+		switch (mode) {
+		case 1:
+			cout << "-" << node->key->name;
+			break;
+		case 2:
+			cout << "-" << node->key->daysTillExpired;
+			break;
+		case 3:
+			cout << "-" << node->key->weight;
+			break;
+		default:
+			cout << "-" << node->key->price;
+			break;
+		}
+		if (node->left != nullptr || node->right != nullptr)
+			cout << " { ";
+		if (node->left != nullptr)
+			displayNode(mode, node->left, colorMode == 15 ? 9 : colorMode + 1);
+		SetConsoleTextAttribute(hConsole, colorMode);
+		if (node->left != nullptr || node->right != nullptr)
+			cout << " | ";
+		if (node->right != nullptr)
+			displayNode(mode, node->right, colorMode == 15 ? 9 : colorMode + 1);
+		SetConsoleTextAttribute(hConsole, colorMode);
+		if (node->left != nullptr || node->right != nullptr)
+			cout << " } ";
 	}
 
 public:
@@ -146,45 +173,44 @@ public:
 	/***
 		Adds element to the tree
 	//*/
-	void addElement(Product *key) {
-		Node *sub = head;
-		Node *sub2 = NULL;
+	void addElement(Product *node) {
+		Node *current = head;
+		Node *subParent = nullptr;
 
-		while (sub != NULL) {
-			sub2 = sub;
-			if (compare(sub->key, key))
-				sub = sub->right;
+		while (current) {
+			subParent = current;
+			if (compare(current->key, node))
+				current = current->right;
 			else
-				sub = sub->left;
+				current = current->left;
 		}
 
-		sub = new Node(key, NULL, NULL, NULL);
-		sub->parent = sub2;
+		current = new Node(node, NULL, NULL, NULL);
+		current->parent = subParent;
 
-		if (sub2 == NULL)
-			head = sub;
-		else if (compare(sub2->key, sub->key))
-			sub2->right = sub;
+		if (!subParent)
+			head = current;
+		else if (compare(subParent->key, current->key))
+			subParent->right = current;
 		else
-			sub2->left = sub;
+			subParent->left = current;
 
-		splay(sub);
-		treeSize++;
+		splay(current);
 	}
 
 	/***
 		Use this function to find element with specific
 		values. Note, that key will be created in the "store" class
 	//*/
-	Product* getElement(Product* key) {
+	Node* getElement(Product* node) {
 		Node *sub = head;
-		while (sub != NULL) {
-			if (compare(sub->key, key))
+		while (sub) {
+			if (compare(sub->key, node))
 				sub = sub->right;
-			else if (compare(key, sub->key))
+			else if (compare(node, sub->key))
 				sub = sub->left;
 			else
-				return sub->key;
+				return sub;
 		}
 		return nullptr;
 	}
@@ -192,20 +218,12 @@ public:
 	/***
 		Displays full tree
 	//*/
-	void displayTree() {
-		// TODO : Write function
+	void displayTree(int mode) {
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		displayNode(mode, head, 9);
+		SetConsoleTextAttribute(hConsole, 15);
 	}
 
-	/***
-		Returns minimum value in the tree
-	//*/
-	Product* minimum() {
-		return subMinimum(head)->key;
-	}
-	/***
-		Returns maximum value in the tree
-	//*/
-	Product* maximum() {
-		return subMaximum(head)->key;
-	}
+	const Product* minimum() { return minimumSubtree(head)->key; }
+	const Product* maximum() { return maximumSubtree(head)->key; }
 };
