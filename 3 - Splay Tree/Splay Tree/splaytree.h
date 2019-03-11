@@ -60,14 +60,19 @@ private:
 		Node *sub = node->right;
 		if (sub) {
 			node->right = sub->left;
-			if (sub->left) sub->left->parent = node;
+			if (sub->left)
+				sub->left->parent = node;
 			sub->parent = node->parent;
 		}
 
-		if (!node->parent) head = sub;
-		else if (node == node->parent->left) node->parent->left = sub;
-		else node->parent->right = sub;
-		if (sub) sub->left = node;
+		if (!node->parent)
+			head = sub;
+		else if (node == node->parent->left)
+			node->parent->left = sub;
+		else
+			node->parent->right = sub;
+		if (sub)
+			sub->left = node;
 		node->parent = sub;
 	}
 
@@ -78,13 +83,17 @@ private:
 		Node *sub = node->left;
 		if (sub) {
 			node->left = sub->right;
-			if (sub->right) sub->right->parent = node;
+			if (sub->right)
+				sub->right->parent = node;
 			sub->parent = node->parent;
 		}
 		if (!node->parent) head = sub;
-		else if (node == node->parent->left) node->parent->left = sub;
-		else node->parent->right = sub;
-		if (sub) sub->right = node;
+		else if (node == node->parent->left)
+			node->parent->left = sub;
+		else
+			node->parent->right = sub;
+		if (sub)
+			sub->right = node;
 		node->parent = sub;
 	}
 
@@ -95,8 +104,10 @@ private:
 		while (node->parent) {
 			// Zig
 			if (!node->parent->parent) {
-				if (node->parent->left == node) rotateRight(node->parent);
-				else rotateLeft(node->parent);
+				if (node->parent->left == node)
+					rotateRight(node->parent);
+				else
+					rotateLeft(node->parent);
 			}
 			// Zig-Zig
 			else if (node->parent->left == node && node->parent->parent->left == node->parent) {
@@ -120,12 +131,14 @@ private:
 	}
 
 	Node* minimumSubtree(Node *node) {
-		while (node->left) node = node->left;
+		while (node->left)
+			node = node->left;
 		return node;
 	}
 
 	Node* maximumSubtree(Node *node) {
-		while (node->right) node = node->right;
+		while (node->right)
+			node = node->right;
 		return node;
 	}
 
@@ -209,8 +222,10 @@ public:
 				sub = sub->right;
 			else if (compare(node, sub->key))
 				sub = sub->left;
-			else
+			else {
+				splay(sub);
 				return sub;
+			}
 		}
 		return nullptr;
 	}
@@ -224,6 +239,10 @@ public:
 		SetConsoleTextAttribute(hConsole, 15);
 	}
 
-	const Product* minimum() { return minimumSubtree(head)->key; }
-	const Product* maximum() { return maximumSubtree(head)->key; }
+	Product* minimum() {
+		return minimumSubtree(head)->key;
+	}
+	Product* maximum() {
+		return maximumSubtree(head)->key;
+	}
 };

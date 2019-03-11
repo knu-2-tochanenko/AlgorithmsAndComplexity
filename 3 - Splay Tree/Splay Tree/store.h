@@ -92,10 +92,88 @@ public:
 		return true;
 	}
 
+	bool printMin(string categoryName) {
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		int selectedCategory = category[categoryName];
+
+		Product* res = this->catalog[selectedCategory]->products->minimum();
+		if ((res != NULL) && (category.find(categoryName) != category.end())) {
+			SetConsoleTextAttribute(hConsole, 10);
+			cout << "------------------\nNAME     :  ";
+			SetConsoleTextAttribute(hConsole, 11);
+			cout << res->name << "\n";
+			SetConsoleTextAttribute(hConsole, 10);
+			cout << "expdate  :  ";
+			SetConsoleTextAttribute(hConsole, 15);
+			cout << res->daysTillExpired << "\n";
+			SetConsoleTextAttribute(hConsole, 10);
+			cout << "weight   :  ";
+			SetConsoleTextAttribute(hConsole, 15);
+			cout << res->weight << " kg\n";
+			SetConsoleTextAttribute(hConsole, 10);
+			cout << "cost     :  ";
+			SetConsoleTextAttribute(hConsole, 15);
+			printf("$%.2f\n", res->price);
+			SetConsoleTextAttribute(hConsole, 10);
+			cout << "------------------\n";
+		}
+		else {
+			SetConsoleTextAttribute(hConsole, 12);
+			cout << "The inputed number is too high!\n";
+			SetConsoleTextAttribute(hConsole, 15);
+		}
+		return true;
+	}
+
+	bool printMax(string categoryName) {
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		int selectedCategory = category[categoryName];
+
+		Product* res = this->catalog[selectedCategory]->products->maximum();
+		if ((res != NULL) && (category.find(categoryName) != category.end())) {
+			SetConsoleTextAttribute(hConsole, 10);
+			cout << "------------------\nNAME     :  ";
+			SetConsoleTextAttribute(hConsole, 11);
+			cout << res->name << "\n";
+			SetConsoleTextAttribute(hConsole, 10);
+			cout << "expdate  :  ";
+			SetConsoleTextAttribute(hConsole, 15);
+			cout << res->daysTillExpired << "\n";
+			SetConsoleTextAttribute(hConsole, 10);
+			cout << "weight   :  ";
+			SetConsoleTextAttribute(hConsole, 15);
+			cout << res->weight << " kg\n";
+			SetConsoleTextAttribute(hConsole, 10);
+			cout << "cost     :  ";
+			SetConsoleTextAttribute(hConsole, 15);
+			printf("$%.2f\n", res->price);
+			SetConsoleTextAttribute(hConsole, 10);
+			cout << "------------------\n";
+		}
+		else {
+			SetConsoleTextAttribute(hConsole, 12);
+			cout << "The inputed number is too high!\n";
+			SetConsoleTextAttribute(hConsole, 15);
+		}
+		return true;
+	}
+
 	void printTrees(int mode) {
 		for (int i = 0; i < catalog.size(); i++) {
 			cout << catalog[i]->name << "\n";
 			catalog[i]->products->displayTree(mode);
+			cout << "\n\n";
+		}
+	}
+
+	void printTree(string categoryName, int mode) {
+
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		int selectedCategory = category[categoryName];
+
+		if (category.find(categoryName) != category.end()) {
+			cout << catalog[selectedCategory]->name << "\n";
+			catalog[selectedCategory]->products->displayTree(mode);
 			cout << "\n\n";
 		}
 	}

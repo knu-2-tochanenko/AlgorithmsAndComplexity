@@ -82,36 +82,55 @@ public:
 			char category[100];
 			cout << "category  :  ";
 			cin >> category;
-			cout << "value   :  ";
-			int integer;
-			double dbl;
-			string str;
 
-						//	1	:	Name
-						//	2	:	Days till expired
-						//	3	:	Weight
-						//	0..	:	Price
+			string command;
+			cout << "command   :  ";
+			cin >> command;
 
-			if (mode == 1) {
-				cin >> str;
-				if (!store.printProduct(category, new Product(str, 0, 0, 0))) {
-					break;
+			if (command == "print") {
+				store.printTree(category, mode);
+			}
+			else if (command == "min") {
+				store.printMin(category);
+			}
+			else if (command == "max") {
+				store.printMax(category);
+			}
+			else if (command == "search") {
+				cout << "value   :  ";
+				int integer;
+				double dbl;
+				string str;
+
+				//	1	:	Name
+				//	2	:	Days till expired
+				//	3	:	Weight
+				//	0..	:	Price
+
+				if (mode == 1) {
+					cin >> str;
+					if (!store.printProduct(category, new Product(str, 0, 0, 0))) {
+						break;
+					}
+				}
+				else if (mode == 2) {
+					cin >> integer;
+					if (!store.printProduct(category, new Product("", integer, 0, 0)))
+						continue;
+				}
+				else if (mode == 3) {
+					cin >> dbl;
+					if (!store.printProduct(category, new Product("", 0, dbl, 0)))
+						continue;
+				}
+				else {
+					cin >> dbl;
+					if (!store.printProduct(category, new Product("", 0, 0, dbl)))
+						continue;
 				}
 			}
-			else if (mode == 2) {
-				cin >> integer;
-				if (!store.printProduct(category, new Product("", integer, 0, 0)))
-				continue;
-			}
-			else if (mode == 3) {
-				cin >> dbl;
-				if (!store.printProduct(category, new Product("", 0, dbl, 0)))
-				continue;
-			}
 			else {
-				cin >> dbl;
-				if (!store.printProduct(category, new Product("", 0, 0, dbl)))
-				continue;
+				cout << "U r dumbo\nThere is no command " << command << endl;
 			}
 		}
 	}
