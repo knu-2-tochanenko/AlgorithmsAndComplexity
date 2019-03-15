@@ -6,7 +6,7 @@ This is a repository for tasks of Algorithms and Complexity
 
 ## Fourth term
 
-**Subject area :** Grocery Store
+**Subject area :** Grocery Store\
 **Objects :** Products
 
 [1 - Perfect Hashing](https://github.com/knu-2nd-tochanenko/AlgorithmsAndComplexity/tree/master/1%20-%20Perfect%20Hashing/Perfect%20Hashing)\
