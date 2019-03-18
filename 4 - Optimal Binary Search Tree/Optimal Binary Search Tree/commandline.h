@@ -87,13 +87,13 @@ public:
 			cin >> category;
 
 			string command;
-			cout << "command   :  ";
+			cout << "command [print, find] :  ";
 			cin >> command;
 
 			if (command == "print") {
 				store.printTree(category, mode);
 			}
-			else if (command == "search") {
+			else if (command == "find") {
 				cout << "value   :  ";
 				int integer;
 				double dbl;
@@ -106,23 +106,23 @@ public:
 
 				if (mode == 1) {
 					cin >> str;
-					if (!store.printProduct(category, new Product(str, 0, 0, 0))) {
+					if (!store.printProduct(category, new Product(str, 0, 0, 0, 0))) {
 						break;
 					}
 				}
 				else if (mode == 2) {
 					cin >> integer;
-					if (!store.printProduct(category, new Product("", integer, 0, 0)))
+					if (!store.printProduct(category, new Product("", integer, 0, 0, 0)))
 						continue;
 				}
 				else if (mode == 3) {
 					cin >> dbl;
-					if (!store.printProduct(category, new Product("", 0, dbl, 0)))
+					if (!store.printProduct(category, new Product("", 0, dbl, 0, 0)))
 						continue;
 				}
 				else {
 					cin >> dbl;
-					if (!store.printProduct(category, new Product("", 0, 0, dbl)))
+					if (!store.printProduct(category, new Product("", 0, 0, dbl, 0)))
 						continue;
 				}
 			}

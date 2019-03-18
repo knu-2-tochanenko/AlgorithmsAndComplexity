@@ -13,6 +13,7 @@ struct Product {
 	int daysTillExpired;	//	Number of days when product is fresh
 	double weight;			//	[kg]	The regular weight of product
 	double price;			//	[$]		Recommended cost of product
+	int freq;
 
 	bool operator+(Product& p) {
 		//	CHANGE THIS FUNCTION IN ORDER TO USE SORTING BY ANOTHER PARAMETER IN STRUCTURE
@@ -20,11 +21,12 @@ struct Product {
 	}
 
 	Product() = default;
-	Product(string name, int daysTillExpired, double weight, double price) {
+	Product(string name, int daysTillExpired, double weight, double price, int freq) {
 		this->name = name;
 		this->daysTillExpired = daysTillExpired;
 		this->weight = weight;
 		this->price = price;
+		this->freq = freq;
 	}
 };
 
@@ -84,7 +86,7 @@ private:
 				cout << values[i] << " ";
 			cout << endl;
 		}
-		if (values.size() == 5) {
+		if (values.size() == 6) {
 			product->category = values[0];
 
 			//	Add category to category list
@@ -95,6 +97,7 @@ private:
 			product->product->daysTillExpired = stoi(values[2]);
 			product->product->weight = stod(values[3]);
 			product->product->price = stod(values[4]);
+			product->product->freq = stod(values[5]);
 		}
 		else {
 			HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);

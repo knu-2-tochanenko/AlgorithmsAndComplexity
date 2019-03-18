@@ -35,7 +35,7 @@ struct Node {
 		this->left = left;
 		this->right = right;
 		this->parent = parent;
-		this->weight = 0;
+		this->weight = key->freq;
 	}
 };
 
@@ -52,7 +52,7 @@ private:
 		Vector is used for easier elgorithm implementation.
 		Can be changed to static arrays in the future.
 	//*/
-	vector< float > prefWeightList;
+	vector< float > weightsList;
 	vector< vector< float > > weights;
 	vector< vector< short int> > roots;
 	vector< Node* > elementsList;
@@ -168,25 +168,27 @@ private:
 		Display matrixes
 	//*/
 	// TODO : Rewrite
-	void showMatrixRootsAndWeights() {
+	void printMatrixes() {
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		/*
 		SetConsoleTextAttribute(hConsole, 14);
 		cout << "Weights list\n";
 		SetConsoleTextAttribute(hConsole, 15);
-		for (int i = 0; i < prefWeightList.size(); i++) {
+		for (int i = 0; i < weightsList.size(); i++) {
 			cout.width(4);
-			cout << fixed << setprecision(6) << prefWeightList[i];
+			cout << fixed << setprecision(6) << weightsList[i] << " ";
 		}
+		//*/
 		SetConsoleTextAttribute(hConsole, 14);
-		cout << "\n\nWeights matrix\n";
+		cout << "\n\nExpected value matrix\n";
 		SetConsoleTextAttribute(hConsole, 15);
 		for (int i = 0; i < weights.size(); i++) {
 			for (int j = 0; j < weights[i].size(); j++) {
 				cout.width(9);
 				if (weights[i][j] == 1e+6)
-					cout << -1;
+					cout << "inf";
 				else
-					cout << fixed << setprecision(6) << weights[i][j];
+					cout << fixed << setprecision(3) << weights[i][j];
 			}
 			cout << '\n';
 		}
@@ -208,9 +210,9 @@ private:
 	void buildMatrixes(vector< Node* >& nodeList) {
 		if (nodeList.empty())
 			return;
-		prefWeightList.push_back(nodeList[0]->weight);
+		weightsList.push_back(nodeList[0]->weight);
 		for (int i = 1; i < nodeList.size(); i++)
-			prefWeightList.push_back(prefWeightList[i - 1] + nodeList[i]->weight);
+			weightsList.push_back(weightsList[i - 1] + nodeList[i]->weight);
 		roots.resize(nodeList.size() + 2, vector<short int>(nodeList.size() + 2, -1));
 		weights.resize(nodeList.size() + 2, vector<float>(nodeList.size() + 2, INT_INFINITY));
 
@@ -227,16 +229,17 @@ private:
 					myRight = roots[i + 1][j];
 				}
 
-				double prefSum = prefWeightList[j - 1] - (i > 1 ? prefWeightList[i - 2] : 0);
+				double pSum = weightsList[j - 1] - (i > 1 ? weightsList[i - 2] : 0);
 				for (int k = myLeft; k <= myRight; ++k) {
-					double val = weights[i][k - 1] + weights[k + 1][j] + prefSum;
+					double val = weights[i][k - 1] + weights[k + 1][j] + pSum;
 					if (val < weights[i][j]) {
 						weights[i][j] = val;
 						roots[i][j] = k;
 					}
 				}
 			}
-		buildTree(nodeList, NULL, 1, nodeList.size());
+			buildTree(nodeList, NULL, 1, nodeList.size());
+		}
 	}
 
 	/***
@@ -251,7 +254,22 @@ private:
 		SetConsoleTextAttribute(hConsole, colorMode);
 		for (int i = 0; i < tabs; i++)
 			cout << "\t";
-		cout << node->key->name << " - " << node->weight;
+		cout << node->key->name << " - " << node->key->freq << " - " << node->weight;
+
+		switch (mode) {
+		case 1:
+			break;
+		case 2:
+			cout << " - " << node->key->daysTillExpired;
+			break;
+		case 3:
+			cout << " - " << node->key->weight;
+			break;
+		default:
+			cout << " - " << node->key->price;
+			break;
+		}
+
 		if (node->left != NULL)
 			displayNodeFancy(node->left, tabs + 1, colorMode == 15 ? 9 : colorMode + 1);
 		else cout << endl;
@@ -271,7 +289,6 @@ private:
 		double sum = 0;
 		for (int i = 0; i < tempList.size(); i++) {
 			nodeList.push_back(tempList[i]);
-			nodeList[nodeList.size() - 1]->weight = rand() % (elementsList.size()*elementsList.size());
 			sum += nodeList[nodeList.size() - 1]->weight;
 		}
 		tempList.clear();
@@ -354,7 +371,7 @@ public:
 	//*/
 	// TODO : Rewrite
 	void displayTree(int mode) {
-		showMatrixRootsAndWeights();
+		printMatrixes();
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		Node* temp = head;
 		displayNodeFancy(temp, 0, 10);
