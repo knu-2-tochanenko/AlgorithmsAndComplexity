@@ -101,8 +101,11 @@ public:
 	}
 
 	void printTrees(int mode) {
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		for (int i = 0; i < catalog.size(); i++) {
-			cout << catalog[i]->name << "\n";
+			SetConsoleTextAttribute(hConsole, 10);
+			cout << "-------" << catalog[i]->name << "--------------------------------------------------\n";
+			SetConsoleTextAttribute(hConsole, 15);
 			catalog[i]->products->displayTree(mode);
 			cout << "\n\n";
 		}

@@ -23,6 +23,9 @@ public:
 
 		SetConsoleTextAttribute(hConsole, 14);
 		cout << "What mode do you want to use? :\n";
+		SetConsoleTextAttribute(hConsole, 12);
+		cout << "Please note, if two elements have the same\nfield value, only one of them will be used!\n";
+		SetConsoleTextAttribute(hConsole, 14);
 		cout << "1\t:\tName\n";
 		cout << "2\t:\tDays till expired\n";
 		cout << "3\t:\tWeight\n";

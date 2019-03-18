@@ -63,8 +63,7 @@ private:
 		1	- The first value is begger than second
 		0	- Values are even
 	//*/
-	bool compare(Product* x, Product* y) {
-		/*
+	int compare(Product* x, Product* y) {
 		if (x == NULL || y == NULL)
 			return false;
 		switch (mode) {
@@ -93,24 +92,6 @@ private:
 				return 1;
 			else return 0;
 		}
-		//*/
-
-		//*
-		string a = x->name;
-		string b = y->name;
-		for (int i = 0; i < min(a.length(),b.length()); ++i) {
-		if (toupper(a[i]) < toupper(b[i]))
-			return -1;
-		else if (toupper(a[i]) > toupper(b[i]))
-			return 1;
-		}
-		if (a.length() > b.length())
-			return 1;
-		else if (a.length() < b.length())
-			return -1;
-		else
-			return 0;
-		//*/
 	}
 
 	/****
@@ -129,17 +110,17 @@ private:
 	/***
 		A functions which is used in building the tree
 	//*/
-	void buildHeap(vector< Node* >& mass, int father, int treeNumber) {
+	void buildHeap(vector< Node* >& arr, int father, int treeNumber) {
 		int maximumSon;
 		while (father <= treeNumber / 2) {
 			if (father * 2 == treeNumber)
 				maximumSon = father * 2;
-			else if (compare(mass[father * 2]->key, mass[father * 2 - 1]->key) == 1)
+			else if (compare(arr[father * 2]->key, arr[father * 2 - 1]->key) == 1)
 				maximumSon = father * 2 + 1;
 			else
 				maximumSon = father * 2;
-			if (compare(mass[father - 1]->key, mass[maximumSon - 1]->key) == -1) {
-				swap(mass[father - 1], mass[maximumSon - 1]);
+			if (compare(arr[father - 1]->key, arr[maximumSon - 1]->key) == -1) {
+				swap(arr[father - 1], arr[maximumSon - 1]);
 				father = maximumSon;
 			}
 			else
@@ -148,38 +129,39 @@ private:
 	}
 
 	/***
-		Another function which is needed for building OBS Tree
+		Another function which is needed for building OBS Tree.
+		Starts the process
 	//*/
-	void newSort(vector< Node* > &mass) {
-		for (int i = mass.size() / 2; i > 0; i--)
-			buildHeap(mass, i, mass.size());
+	void newSort(vector< Node* > &arr) {
+		for (int i = arr.size() / 2; i > 0; i--)
+			buildHeap(arr, i, arr.size());
 
-		for (int i = mass.size(); i > 0; i--) {
-			swap(mass[i - 1], mass[0]);
-			buildHeap(mass, 1, i - 1);
+		for (int i = arr.size(); i > 0; i--) {
+			swap(arr[i - 1], arr[0]);
+			buildHeap(arr, 1, i - 1);
 		}
 	}
 
 	/***
 		Main functions for building a main tree
 	//*/
-	void buildTree(vector< Node* >& mass, Node* node, int x, int y) {
+	void buildTree(vector< Node* >& arr, Node* node, int x, int y) {
 		if (roots[x][y] < 0)
 			return;
-		Node* curV = mass[roots[x][y] - 1];
+		Node* sub = arr[roots[x][y] - 1];
 		if (node == NULL)
-			head = curV;
+			head = sub;
 		else {
-			curV->parent = node;
-			if (compare(curV->key, node->key) == 1)
-				node->right = curV;
+			sub->parent = node;
+			if (compare(sub->key, node->key) == 1)
+				node->right = sub;
 			else
-				node->left = curV;
+				node->left = sub;
 		}
 		if (roots[x][y] > x)
-			buildTree(mass, curV, x, roots[x][y] - 1);
+			buildTree(arr, sub, x, roots[x][y] - 1);
 		if (roots[x][y] < y)
-			buildTree(mass, curV, roots[x][y] + 1, y);
+			buildTree(arr, sub, roots[x][y] + 1, y);
 	}
 
 	/***
@@ -187,12 +169,17 @@ private:
 	//*/
 	// TODO : Rewrite
 	void showMatrixRootsAndWeights() {
-		cout << "<-------------------------------prefics weight list------------------------------->\n";
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		SetConsoleTextAttribute(hConsole, 14);
+		cout << "Weights list\n";
+		SetConsoleTextAttribute(hConsole, 15);
 		for (int i = 0; i < prefWeightList.size(); i++) {
-			cout.width(9);
+			cout.width(4);
 			cout << fixed << setprecision(6) << prefWeightList[i];
 		}
-		cout << "\n\n<-------------------------------matrix of weights------------------------------->\n";
+		SetConsoleTextAttribute(hConsole, 14);
+		cout << "\n\nWeights matrix\n";
+		SetConsoleTextAttribute(hConsole, 15);
 		for (int i = 0; i < weights.size(); i++) {
 			for (int j = 0; j < weights[i].size(); j++) {
 				cout.width(9);
@@ -203,8 +190,9 @@ private:
 			}
 			cout << '\n';
 		}
-
-		cout << "\n<-------------------------------matrix of roots------------------------------->\n";
+		SetConsoleTextAttribute(hConsole, 14);
+		cout << "\nRoots matrix\n";
+		SetConsoleTextAttribute(hConsole, 15);
 		for (int i = 0; i < roots.size(); i++) {
 			for (int j = 0; j < roots[i].size(); j++) {
 				cout.width(3);
@@ -217,8 +205,7 @@ private:
 	/***
 		Build matrixes
 	//*/
-	// TODO : Rewrite
-	void buildRootsAndWeights(vector< Node* >& nodeList) {
+	void buildMatrixes(vector< Node* >& nodeList) {
 		if (nodeList.empty())
 			return;
 		prefWeightList.push_back(nodeList[0]->weight);
@@ -226,64 +213,54 @@ private:
 			prefWeightList.push_back(prefWeightList[i - 1] + nodeList[i]->weight);
 		roots.resize(nodeList.size() + 2, vector<short int>(nodeList.size() + 2, -1));
 		weights.resize(nodeList.size() + 2, vector<float>(nodeList.size() + 2, INT_INFINITY));
-		for (int i = 1; i <= nodeList.size() + 1; i++)
-		{
+
+		for (int i = 1; i <= nodeList.size() + 1; i++) {
 			roots[i][i - 1] = 0;
 			weights[i][i - 1] = 0;
 		}
-		for (int step = 1; step <= nodeList.size(); ++step)
-		{
-			for (int i = 1; i + step <= nodeList.size() + 1; i++)
-			{
+		for (int step = 1; step <= nodeList.size(); step++) {
+			for (int i = 1; i + step <= nodeList.size() + 1; i++) {
 				int j = i + step - 1;
 				int myLeft = i, myRight = j;
-				if (step > 1)
-				{
+				if (step > 1) {
 					myLeft = roots[i][j - 1];
 					myRight = roots[i + 1][j];
 				}
 
 				double prefSum = prefWeightList[j - 1] - (i > 1 ? prefWeightList[i - 2] : 0);
-				for (int k = myLeft; k <= myRight; ++k)
-				{
+				for (int k = myLeft; k <= myRight; ++k) {
 					double val = weights[i][k - 1] + weights[k + 1][j] + prefSum;
-					if (val < weights[i][j])
-					{
+					if (val < weights[i][j]) {
 						weights[i][j] = val;
 						roots[i][j] = k;
 					}
 				}
 			}
-		}
-
-		if (nodeList.size() <= 16)
-			showMatrixRootsAndWeights();
-
 		buildTree(nodeList, NULL, 1, nodeList.size());
 	}
 
 	/***
-		A function which is used for displaying path for the node
+		Displays individual node (using fancy colors) (and fancy structure)
 	//*/
-	// TODO : Rewrite
-	void showDfs(Node* v, int numberOfTabs)
-	{
-		if (v->right != NULL)
-			showDfs(v->right, numberOfTabs + 1);
-		else
-			cout << '\n';
-
-		for (int i = 0; i < numberOfTabs; i++)
+	void displayNodeFancy(Node* node, int tabs, int colorMode) {
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		SetConsoleTextAttribute(hConsole, colorMode);
+		if (node->right != NULL)
+			displayNodeFancy(node->right, tabs + 1, colorMode == 15 ? 9 : colorMode + 1);
+		else cout << endl;
+		SetConsoleTextAttribute(hConsole, colorMode);
+		for (int i = 0; i < tabs; i++)
 			cout << "\t";
-		cout << v->key->name << "   " << v->weight;
-
-		if (v->left != NULL)
-			showDfs(v->left, numberOfTabs + 1);
-		else
-			cout << '\n';
+		cout << node->key->name << " - " << node->weight;
+		if (node->left != NULL)
+			displayNodeFancy(node->left, tabs + 1, colorMode == 15 ? 9 : colorMode + 1);
+		else cout << endl;
+		SetConsoleTextAttribute(hConsole, colorMode);
 	}
 
-	// TODO : Make internal list which is going to be inhabited with elements
+	/***
+		The main function. It NEEDS to be executed after reading all products
+	//*/
 	void mainBuild() {
 		vector< Node* > tempList, nodeList;
 		for (int i = 0; i < elementsList.size(); i++)
@@ -291,20 +268,17 @@ private:
 
 		newSort(tempList);
 
-		double allWeight = 0;
-		for (int i = 0; i < tempList.size(); i++)
-		{
-			if (tempList[i]->key->name != "") {
-				nodeList.push_back(tempList[i]);
-				nodeList[nodeList.size() - 1]->weight = rand() % (elementsList.size()*elementsList.size());
-				allWeight += nodeList[nodeList.size() - 1]->weight;
-			}
+		double sum = 0;
+		for (int i = 0; i < tempList.size(); i++) {
+			nodeList.push_back(tempList[i]);
+			nodeList[nodeList.size() - 1]->weight = rand() % (elementsList.size()*elementsList.size());
+			sum += nodeList[nodeList.size() - 1]->weight;
 		}
 		tempList.clear();
 		for (int i = 0; i < nodeList.size(); i++)
-			nodeList[i]->weight /= allWeight;
+			nodeList[i]->weight /= sum;
 
-		buildRootsAndWeights(nodeList);
+		buildMatrixes(nodeList);
 	}
 
 	/***
@@ -380,13 +354,10 @@ public:
 	//*/
 	// TODO : Rewrite
 	void displayTree(int mode) {
-		/*
-			shared_ptr<TNode> temp = root;
-	showDfs(temp, 0);
-		*/
-
+		showMatrixRootsAndWeights();
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-		displayNode(mode, head, 9);
+		Node* temp = head;
+		displayNodeFancy(temp, 0, 10);
 		SetConsoleTextAttribute(hConsole, 15);
 	}
 };
