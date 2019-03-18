@@ -24,10 +24,10 @@ struct Node {
 	}
 
 	Node() {
-		this->key = nullptr;
-		this->left = nullptr;
-		this->right = nullptr;
-		this->parent = nullptr;
+		this->key = NULL;
+		this->left = NULL;
+		this->right = NULL;
+		this->parent = NULL;
 		this->weight = 0;
 	}
 	Node(Product* key, Node* left, Node* right, Node* parent) {
@@ -41,7 +41,7 @@ struct Node {
 
 class OBSTree {
 private:
-	Node* head = nullptr;
+	Node* head = NULL;
 	int mode = 0;		//	1	:	Name
 						//	2	:	Days till expired
 						//	3	:	Weight
@@ -64,7 +64,8 @@ private:
 		0	- Values are even
 	//*/
 	bool compare(Product* x, Product* y) {
-		if (x == nullptr || y == nullptr)
+		/*
+		if (x == NULL || y == NULL)
 			return false;
 		switch (mode) {
 		case 1:
@@ -92,13 +93,31 @@ private:
 				return 1;
 			else return 0;
 		}
+		//*/
+
+		//*
+		string a = x->name;
+		string b = y->name;
+		for (int i = 0; i < min(a.length(),b.length()); ++i) {
+		if (toupper(a[i]) < toupper(b[i]))
+			return -1;
+		else if (toupper(a[i]) > toupper(b[i]))
+			return 1;
+		}
+		if (a.length() > b.length())
+			return 1;
+		else if (a.length() < b.length())
+			return -1;
+		else
+			return 0;
+		//*/
 	}
 
 	/****
 		DFS is used for searching for an item
 	//*/
 	Node* DFS(Node* node, Product* key) {
-		if (node == nullptr)
+		if (node == NULL)
 			return node;
 		else if (compare(node->key, key) == 1)
 			return DFS(node->left, key);
@@ -148,7 +167,7 @@ private:
 		if (roots[x][y] < 0)
 			return;
 		Node* curV = mass[roots[x][y] - 1];
-		if (node == nullptr)
+		if (node == NULL)
 			head = curV;
 		else {
 			curV->parent = node;
@@ -196,7 +215,7 @@ private:
 	}
 
 	/***
-		Build matrixed
+		Build matrixes
 	//*/
 	// TODO : Rewrite
 	void buildRootsAndWeights(vector< Node* >& nodeList) {
@@ -240,7 +259,7 @@ private:
 		if (nodeList.size() <= 16)
 			showMatrixRootsAndWeights();
 
-		buildTree(nodeList, nullptr, 1, nodeList.size());
+		buildTree(nodeList, NULL, 1, nodeList.size());
 	}
 
 	/***
@@ -249,7 +268,7 @@ private:
 	// TODO : Rewrite
 	void showDfs(Node* v, int numberOfTabs)
 	{
-		if (v->right != nullptr)
+		if (v->right != NULL)
 			showDfs(v->right, numberOfTabs + 1);
 		else
 			cout << '\n';
@@ -258,7 +277,7 @@ private:
 			cout << "\t";
 		cout << v->key->name << "   " << v->weight;
 
-		if (v->left != nullptr)
+		if (v->left != NULL)
 			showDfs(v->left, numberOfTabs + 1);
 		else
 			cout << '\n';
@@ -309,17 +328,17 @@ private:
 			cout << "-" << node->key->price;
 			break;
 		}
-		if (node->left != nullptr || node->right != nullptr)
+		if (node->left != NULL || node->right != NULL)
 			cout << " { ";
-		if (node->left != nullptr)
+		if (node->left != NULL)
 			displayNode(mode, node->left, colorMode == 15 ? 9 : colorMode + 1);
 		SetConsoleTextAttribute(hConsole, colorMode);
-		if (node->left != nullptr || node->right != nullptr)
+		if (node->left != NULL || node->right != NULL)
 			cout << " | ";
-		if (node->right != nullptr)
+		if (node->right != NULL)
 			displayNode(mode, node->right, colorMode == 15 ? 9 : colorMode + 1);
 		SetConsoleTextAttribute(hConsole, colorMode);
-		if (node->left != nullptr || node->right != nullptr)
+		if (node->left != NULL || node->right != NULL)
 			cout << " } ";
 	}
 
@@ -334,7 +353,7 @@ public:
 	//*/
 	// TODO : Rewrite
 	void addElement(Product *node) {
-		elementsList.push_back(new Node(node, nullptr, nullptr, nullptr));
+		elementsList.push_back(new Node(node, NULL, NULL, NULL));
 	}
 
 	/***
@@ -351,9 +370,9 @@ public:
 	// TODO : Rewrite
 	Node* getElement(Product* node) {
 		Node* v = DFS(head, node);
-		if (v != nullptr)
+		if (v != NULL)
 			return v;
-		return nullptr;
+		return NULL;
 	}
 
 	/***
