@@ -1,0 +1,488 @@
+CATEGORY,PRODUCT,EXP DATE,WEIGHT,PRICE
+FRUITS,Azan,150,1.00,60.78
+FRUITS,Apple,300,1.00,78.32
+FRUITS,Akee,120,1.00,10.38
+FRUITS,Apricot,270,1.00,74.51
+FRUITS,Avocado,180,1.00,88.90
+FRUITS,Banana,120,1.00,52.66
+FRUITS,Bilberry,300,1.00,37.53
+FRUITS,Blackberry,90,1.00,41.11
+FRUITS,Blackcurrant,120,1.00,14.10
+FRUITS,Black sapote,270,1.00,42.12
+FRUITS,Blueberry,60,1.00,43.33
+FRUITS,Boysenberry,240,1.00,25.73
+FRUITS,Buddha's hand,270,1.00,38.42
+FRUITS,Crab apples,90,1.00,32.53
+FRUITS,Currant,60,1.00,30.63
+FRUITS,Cherry,90,1.00,81.88
+FRUITS,Cherimoya,300,1.00,17.52
+FRUITS,Chico fruit,30,1.00,55.46
+FRUITS,Cloudberry,180,1.00,91.40
+FRUITS,Coconut,180,1.00,19.10
+FRUITS,Cranberry,300,1.00,91.11
+FRUITS,Cucumber,30,1.00,3.63
+FRUITS,Damson,180,1.00,10.59
+FRUITS,Date,120,1.00,97.32
+FRUITS,Dragonfruit,120,1.00,44.64
+FRUITS,Durian,60,1.00,42.99
+FRUITS,Elderberry,120,1.00,99.33
+FRUITS,Feijoa,180,1.00,7.95
+FRUITS,Fig,300,1.00,90.51
+FRUITS,Goji berry,90,1.00,28.89
+FRUITS,Gooseberry,270,1.00,32.28
+FRUITS,Grape,270,1.00,48.92
+FRUITS,Raisin,300,1.00,97.53
+FRUITS,Grapefruit,90,1.00,61.46
+FRUITS,Guava,90,1.00,83.20
+FRUITS,Honeyberry,270,1.00,29.52
+FRUITS,Huckleberry,90,1.00,17.72
+FRUITS,Jabuticaba,270,1.00,49.57
+FRUITS,Jackfruit,120,1.00,41.96
+FRUITS,Jambul,30,1.00,4.47
+FRUITS,Japanese plum,300,1.00,54.19
+FRUITS,Jostaberry,300,1.00,3.40
+FRUITS,Jujube,120,1.00,74.69
+FRUITS,Juniper berry,300,1.00,4.75
+FRUITS,Kiwano,60,1.00,23.97
+FRUITS,Kiwifruit,270,1.00,73.10
+FRUITS,Kumquat,150,1.00,85.86
+FRUITS,Lemon,150,1.00,46.98
+FRUITS,Lime,210,1.00,37.06
+FRUITS,Loquat,150,1.00,93.09
+FRUITS,Longan,30,1.00,71.48
+FRUITS,Lychee,210,1.00,93.58
+FRUITS,Mango,120,1.00,34.62
+FRUITS,Mangosteen,300,1.00,25.85
+FRUITS,Marionberry,120,1.00,88.84
+FRUITS,Melon,90,1.00,12.56
+FRUITS,Cantaloupe,210,1.00,74.93
+FRUITS,Honeydew,120,1.00,48.17
+FRUITS,Watermelon,150,1.00,10.48
+FRUITS,Miracle fruit,90,1.00,80.86
+FRUITS,Mulberry,120,1.00,96.06
+FRUITS,Nectarine,300,1.00,95.09
+FRUITS,Nance,210,1.00,28.71
+FRUITS,Olive,30,1.00,37.00
+FRUITS,Orange,30,1.00,27.87
+FRUITS,Blood orange,240,1.00,44.83
+FRUITS,Clementine,120,1.00,43.63
+FRUITS,Mandarine,150,1.00,72.77
+FRUITS,Tangerine,150,1.00,61.08
+FRUITS,Papaya,210,1.00,25.44
+VEGETABLES,Artichoke,180,1.00,43.04
+VEGETABLES,Aubergine,270,1.00,29.59
+VEGETABLES,Asparagus,90,1.00,56.91
+VEGETABLES,Legumes,30,1.00,59.15
+VEGETABLES,Alfalfa Sprouts,300,1.00,6.66
+VEGETABLES,Azuki Beans,60,1.00,54.92
+VEGETABLES,Bean Sprouts,120,1.00,26.20
+VEGETABLES,Black Beans,30,1.00,58.84
+VEGETABLES,Black-Eyed Peas,120,1.00,93.90
+VEGETABLES,Borlotti Bean,240,1.00,96.66
+VEGETABLES,Broad Beans,240,1.00,16.96
+VEGETABLES,Chickpeas,120,1.00,73.78
+VEGETABLES,Green Beans,210,1.00,45.62
+VEGETABLES,kidney beans,300,1.00,38.09
+VEGETABLES,Lentils,30,1.00,74.48
+VEGETABLES,Lima Beans,240,1.00,97.13
+VEGETABLES,Mung Beans,150,1.00,79.05
+VEGETABLES,Navy Beans,270,1.00,53.14
+VEGETABLES,Pinto Beans,90,1.00,51.19
+VEGETABLES,Runner Beans,210,1.00,46.42
+VEGETABLES,Split Peas,180,1.00,24.42
+VEGETABLES,Soy Beans,90,1.00,20.12
+VEGETABLES,Peas,150,1.00,31.35
+VEGETABLES,Mangetout,30,1.00,14.82
+VEGETABLES,Broccoflower,300,1.00,18.11
+VEGETABLES,Broccoli,150,1.00,22.89
+VEGETABLES,Brussels Sprouts,180,1.00,38.72
+VEGETABLES,Cabbage,60,1.00,50.81
+VEGETABLES,Kohlrabi,150,1.00,32.26
+VEGETABLES,Cauliflower,240,1.00,68.02
+VEGETABLES,Celery,60,1.00,92.69
+VEGETABLES,Endive,240,1.00,87.15
+VEGETABLES,Fiddleheads,300,1.00,85.69
+VEGETABLES,Frisee,210,1.00,11.91
+VEGETABLES,Fennel,60,1.00,87.29
+VEGETABLES,Greens,300,1.00,99.07
+VEGETABLES,Beet Greens,150,1.00,38.60
+VEGETABLES,Bok Choy,120,1.00,27.30
+VEGETABLES,Chard,90,1.00,6.90
+VEGETABLES,Collard Greens,30,1.00,91.49
+VEGETABLES,Kale,210,1.00,39.13
+VEGETABLES,Mustard Greens,240,1.00,50.62
+VEGETABLES,Spinach,270,1.00,15.75
+VEGETABLES,Herbs and Spices,120,1.00,74.56
+VEGETABLES,Anise,270,1.00,12.95
+VEGETABLES,Basil,210,1.00,37.70
+VEGETABLES,Caraway,270,1.00,15.36
+VEGETABLES,Cilantro,30,1.00,99.58
+VEGETABLES,Chamomile,120,1.00,78.67
+VEGETABLES,Dill,90,1.00,21.94
+VEGETABLES,Lavender,30,1.00,99.13
+VEGETABLES,Lemon Grass,180,1.00,76.36
+VEGETABLES,Marjoram,180,1.00,31.02
+VEGETABLES,Oregano,180,1.00,90.58
+VEGETABLES,Parsley,120,1.00,91.28
+VEGETABLES,Rosemary,150,1.00,92.70
+VEGETABLES,Sage,30,1.00,36.32
+VEGETABLES,Thyme,180,1.00,88.26
+VEGETABLES,Lettuce,90,1.00,39.57
+VEGETABLES,Arugula,60,1.00,18.86
+VEGETABLES,Mushrooms,270,1.00,68.23
+VEGETABLES,Nettles,150,1.00,72.10
+VEGETABLES,New Zealand Spinach,210,1.00,87.48
+VEGETABLES,Okra,90,1.00,4.47
+VEGETABLES,Onions,180,1.00,39.62
+VEGETABLES,Chives,120,1.00,9.12
+VEGETABLES,Garlic,30,1.00,4.37
+VEGETABLES,Leek,120,1.00,22.39
+VEGETABLES,Onion,180,1.00,27.52
+VEGETABLES,Shallot,30,1.00,78.46
+VEGETABLES,Scallion,60,1.00,18.69
+VEGETABLES,Peppers,120,1.00,15.58
+VEGETABLES,Bell Pepper,150,1.00,80.74
+VEGETABLES,Chili Pepper,180,1.00,55.02
+VEGETABLES,Jalapeco,300,1.00,83.90
+VEGETABLES,Habanero,90,1.00,9.66
+VEGETABLES,Paprika,60,1.00,78.09
+VEGETABLES,Tabasco pepper,210,1.00,42.67
+VEGETABLES,Cayenne pepper,60,1.00,77.19
+VEGETABLES,Radicchio,180,1.00,33.24
+VEGETABLES,Rhubarb,270,1.00,60.04
+VEGETABLES,Root Vegetables,210,1.00,54.60
+VEGETABLES,Beetroot,120,1.00,30.23
+VEGETABLES,Mangel-Wurzel,60,1.00,7.45
+VEGETABLES,Carrot,30,1.00,19.36
+VEGETABLES,Celeriac,240,1.00,8.63
+VEGETABLES,Corms,240,1.00,23.85
+VEGETABLES,Eddoe,150,1.00,10.96
+VEGETABLES,Konjac,240,1.00,29.01
+VEGETABLES,Taro,210,1.00,17.40
+VEGETABLES,Water Chestnut,90,1.00,20.09
+VEGETABLES,Ginger,210,1.00,56.86
+VEGETABLES,Parsnip,30,1.00,29.64
+VEGETABLES,Rutabaga,60,1.00,42.73
+VEGETABLES,Radish,300,1.00,87.81
+VEGETABLES,Wasabi,30,1.00,15.17
+VEGETABLES,Horseradish,300,1.00,58.43
+VEGETABLES,White Radish,120,1.00,13.52
+VEGETABLES,Daikon,270,1.00,25.53
+VEGETABLES,Tubers,120,1.00,64.06
+VEGETABLES,Jicama,120,1.00,47.72
+VEGETABLES,Jerusalem Artichoke,30,1.00,8.41
+VEGETABLES,Potato,150,1.00,3.03
+VEGETABLES,Quandong,270,1.00,28.36
+VEGETABLES,Sunchokes,180,1.00,59.00
+VEGETABLES,Sweet Potato,30,1.00,74.87
+VEGETABLES,Yam,210,1.00,89.07
+VEGETABLES,Turnip,300,1.00,47.68
+VEGETABLES,Salsify,60,1.00,37.05
+VEGETABLES,Skirret,300,1.00,53.75
+VEGETABLES,Sweetcorn,60,1.00,84.94
+VEGETABLES,Topinambur,300,1.00,71.60
+VEGETABLES,Squashes,60,1.00,46.20
+VEGETABLES,Acorn Squash,240,1.00,64.66
+VEGETABLES,Bitter Melon,270,1.00,91.95
+VEGETABLES,Butternut Squash,150,1.00,27.89
+VEGETABLES,Banana Squash,120,1.00,88.67
+VEGETABLES,Courgette,90,1.00,8.55
+VEGETABLES,Cucumber,30,1.00,50.06
+VEGETABLES,Delicata,300,1.00,85.25
+VEGETABLES,Gem Squash,180,1.00,23.32
+VEGETABLES,Hubbard Squash,270,1.00,43.75
+VEGETABLES,Marrow,120,1.00,64.53
+VEGETABLES,Patty Pans,180,1.00,33.36
+VEGETABLES,Pumpkin,210,1.00,95.21
+VEGETABLES,Spaghetti Squash,270,1.00,59.58
+VEGETABLES,Tat Soi,180,1.00,53.53
+VEGETABLES,Tomato,210,1.00,91.56
+VEGETABLES,Watercress,240,1.00,27.63
+SODAS,Breizh Cola,90,0.33,26.91
+SODAS,Coca-Cola,120,0.33,40.98
+SODAS,Jolt Cola,270,0.33,96.54
+SODAS,Mecca Cola,60,0.33,56.96
+SODAS,Pepsi,180,0.33,63.22
+SODAS,Topsia Cola,150,0.33,3.79
+SODAS,Virgin Vanilla Cola,30,0.33,87.89
+SODAS,Green Cola,60,0.33,18.40
+SODAS,RC cola,210,0.33,81.92
+SODAS,Bubble up,300,0.33,8.93
+SODAS,Corona,180,0.33,3.88
+SODAS,Cresta,270,0.33,61.69
+SODAS,R. White's,90,0.33,97.86
+SODAS,Monster,210,0.33,42.88
+SODAS,Zedazeni Lemonade,60,0.33,69.03
+SODAS,Kinnie,150,0.33,96.15
+SODAS,Quatro,30,0.33,67.52
+SODAS,Solo Orange,150,0.33,34.71
+SODAS,Solo Lime,90,0.33,11.92
+SODAS,Squirt,120,0.33,18.56
+SODAS,Tropicana Tw!ster Soda,180,0.33,68.11
+SODAS,Ramune,180,0.33,39.90
+WATER,Aquafina,210,0.50,17.21
+WATER,Bilbor,240,0.50,10.65
+WATER,Borsec,120,0.50,51.54
+WATER,Buxton,270,0.50,49.06
+WATER,Buzia?,240,0.50,81.53
+WATER,Damavand,270,0.50,9.33
+WATER,Dorna,240,0.50,36.40
+WATER,Fiji,150,0.50,95.74
+WATER,Highland Spring,210,0.50,47.86
+WATER,Masafi,60,0.50,3.71
+WATER,Nectar,90,0.50,65.69
+WATER,Nestle,300,0.50,51.31
+WATER,Perrier,120,0.50,80.31
+WATER,Polar Beverages,120,0.50,70.45
+WATER,Vittel,90,0.50,2.74
+WATER,Volvic,180,0.50,51.85
+WATER,Volvic Revive,210,0.50,70.79
+WATER,Voss,240,0.50,13.87
+JUICE,Copella,300,0.33,17.78
+JUICE,Cottee's,300,0.33,98.01
+JUICE,Crusha,120,0.33,61.28
+JUICE,Frijj,60,0.33,96.90
+JUICE,Izze,90,0.33,44.26
+JUICE,J2O,300,0.33,22.08
+JUICE,Kool-Aid,30,0.33,70.34
+JUICE,Minute Maid,300,0.33,57.71
+JUICE,Mott's,150,0.33,7.54
+JUICE,Orangina,90,0.33,80.93
+JUICE,Pago International,120,0.33,82.74
+JUICE,Pet,240,0.33,64.66
+JUICE,Robinsons,90,0.33,16.15
+JUICE,Suntop,180,0.33,53.35
+JUICE,Tropicana products,60,0.33,55.21
+JUICE,turkey hill Products,120,0.33,69.78
+JUICE,Yazoo Chill,90,0.33,52.30
+JUICE,Yoo-hoo,180,0.33,28.25
+JUICE,Ocean Spray,270,0.33,62.44
+ICE-CREAMS,Acai Berry,30,0.10,3.20
+ICE-CREAMS,Alaskan Mint,30,0.10,8.89
+ICE-CREAMS,All American Favorite,44,0.10,0.16
+ICE-CREAMS,Amaretto Brownie,44,0.10,0.25
+ICE-CREAMS,Amaretto Brownie Cheesecake,30,0.10,0.10
+ICE-CREAMS,Amaretto Cherry,51,0.10,5.50
+ICE-CREAMS,Amaretto Chocolate Chip Cheesecake,51,0.10,6.02
+ICE-CREAMS,Apple Cinnamon,58,0.10,2.82
+ICE-CREAMS,Apple Pie ala mode,30,0.10,8.74
+ICE-CREAMS,Banana,51,0.10,3.70
+ICE-CREAMS,Banana Chocolate Chip,58,0.10,2.56
+ICE-CREAMS,Banana Coconut Macaroon Cheesecake,37,0.10,6.20
+ICE-CREAMS,Banana French Toast,51,0.10,6.93
+ICE-CREAMS,Banana Fudge Swirl,51,0.10,0.27
+ICE-CREAMS,Banana Pudding,58,0.10,5.76
+ICE-CREAMS,Banana Split,44,0.10,7.07
+ICE-CREAMS,Banana Walnut,37,0.10,5.79
+ICE-CREAMS,Bananas Foster,51,0.10,0.61
+ICE-CREAMS,Bananas Foster Cheesecake,44,0.10,4.84
+ICE-CREAMS,Bats in the Attic,51,0.10,7.74
+ICE-CREAMS,Birthday Cake,37,0.10,8.91
+ICE-CREAMS,Black Cherry,58,0.10,7.23
+ICE-CREAMS,Black Cherry Cheesecake,58,0.10,8.26
+ICE-CREAMS,Black Raspberry,37,0.10,9.18
+ICE-CREAMS,Black Raspberry Cheesecake,37,0.10,4.19
+ICE-CREAMS,Black Walnut,37,0.10,9.03
+ICE-CREAMS,Black Walnut Cheesecake,58,0.10,3.31
+ICE-CREAMS,Blackberry Bramble,51,0.10,8.40
+ICE-CREAMS,Blackberry Cheesecake,51,0.10,9.64
+ICE-CREAMS,Blue Moon,58,0.10,8.93
+ICE-CREAMS,Blue Raspberry,44,0.10,9.30
+ICE-CREAMS,Blue Skies and Rainbows,30,0.10,4.90
+ICE-CREAMS,Blueberry Banana,51,0.10,1.47
+ICE-CREAMS,Blueberry Brown Sugar,58,0.10,7.56
+ICE-CREAMS,Blueberry Cheesecake,30,0.10,5.31
+ICE-CREAMS,Blueberry French Toast,30,0.10,1.71
+ICE-CREAMS,Blueberry Pie,51,0.10,1.85
+ICE-CREAMS,Blueberry Sundae,30,0.10,1.41
+ICE-CREAMS,Brown Sugar,44,0.10,5.83
+ICE-CREAMS,Brown Sugar Cinnamon,58,0.10,8.29
+ICE-CREAMS,Brownie Snicker Finger,37,0.10,6.55
+ICE-CREAMS,Bubblegum,58,0.10,9.17
+ICE-CREAMS,Bubblegum Cheesecake,44,0.10,1.61
+ICE-CREAMS,Bumbleberry,44,0.10,4.11
+ICE-CREAMS,Bumbleberry Cheesecake,58,0.10,3.65
+ICE-CREAMS,Butter Brickle,30,0.10,1.76
+ICE-CREAMS,Butter Pecan,37,0.10,4.55
+ICE-CREAMS,Buttered Almond,37,0.10,5.27
+ICE-CREAMS,Butterfinger,58,0.10,5.10
+ICE-CREAMS,Butterfinger Cheesecake,37,0.10,2.86
+ICE-CREAMS,Butterscotch,30,0.10,1.09
+ICE-CREAMS,Butterscotch Cheesecake,30,0.10,8.35
+ICE-CREAMS,Cake Batter,58,0.10,4.99
+ICE-CREAMS,Caramallow Chip,37,0.10,6.21
+ICE-CREAMS,Caramel Apple Crunch,58,0.10,5.92
+ICE-CREAMS,Caramel Banana,37,0.10,8.80
+ICE-CREAMS,Caramel Fudge Swirl,58,0.10,7.92
+ICE-CREAMS,Carrot Cake,58,0.10,8.87
+ICE-CREAMS,Cheesecake,58,0.10,8.15
+ICE-CREAMS,Cherokee Gold,51,0.10,5.24
+ICE-CREAMS,Chiefs Chip,58,0.10,5.04
+ICE-CREAMS,Chocolate,58,0.10,3.45
+ICE-CREAMS,Chocolate Brownie Chunks,51,0.10,0.63
+ICE-CREAMS,Chocolate Caramel Almond,37,0.10,2.92
+ICE-CREAMS,Chocolate Cheesecake,37,0.10,4.33
+ICE-CREAMS,Chocolate Cherry,58,0.10,9.26
+ICE-CREAMS,Chocolate Chip Cookie,58,0.10,6.60
+ICE-CREAMS,Chocolate Chocolate Fudge,44,0.10,6.55
+ICE-CREAMS,Chocolate Chocolate Mint,37,0.10,6.35
+ICE-CREAMS,Chocolate Cookies & Cream,58,0.10,8.16
+ICE-CREAMS,Chocolate Covered Banana,37,0.10,0.76
+ICE-CREAMS,Chocolate Covered Strawberry,30,0.10,3.20
+ICE-CREAMS,Chocolate Espresso,58,0.10,0.45
+ICE-CREAMS,Chocolate Fudge,44,0.10,1.31
+ICE-CREAMS,Chocolate Fudge Brownie,37,0.10,2.22
+ICE-CREAMS,Chocolate L'Orange,37,0.10,5.80
+ICE-CREAMS,Chocolate Malt 'Whoppers',51,0.10,5.81
+ICE-CREAMS,Chocolate Passion,58,0.10,1.96
+ICE-CREAMS,Chocolate Peanut Butter,30,0.10,1.05
+ICE-CREAMS,Chocolate Peanut Butter Cheesecake,44,0.10,0.20
+ICE-CREAMS,Chocolate Pistachio Almond,37,0.10,0.56
+ICE-CREAMS,Chocolate Poppers,58,0.10,2.78
+ICE-CREAMS,Chocolate Raspberry Truffle,44,0.10,2.35
+ICE-CREAMS,Chocolate Speed Bumps,51,0.10,3.03
+ICE-CREAMS,Chocolate Swamp,44,0.10,2.04
+ICE-CREAMS,Chocolate Turtle,58,0.10,4.11
+ICE-CREAMS,Christmas Spagetti,44,0.10,7.17
+ICE-CREAMS,Cinnamon,58,0.10,3.68
+ICE-CREAMS,Cinnamon Turtle,44,0.10,2.01
+ICE-CREAMS,Coconut,30,0.10,3.52
+ICE-CREAMS,Coconut Almond Delight,37,0.10,1.73
+ICE-CREAMS,Coconut Fudge Supreme,58,0.10,2.76
+ICE-CREAMS,Coconut Ginger,30,0.10,3.51
+ICE-CREAMS,Coffee,58,0.10,5.04
+ICE-CREAMS,Coffee and Cognac,44,0.10,4.49
+ICE-CREAMS,Coffee Chip Cheesecake,44,0.10,3.39
+ICE-CREAMS,Coffee with Espresso Pillows,58,0.10,1.76
+ICE-CREAMS,Confetti,30,0.10,5.59
+ICE-CREAMS,Cookie Dough,58,0.10,8.40
+ICE-CREAMS,Cotton Candy,37,0.10,5.37
+ICE-CREAMS,Dulce De Leche Bonanza,51,0.10,3.72
+ICE-CREAMS,Easter Egg Hunt,37,0.10,1.03
+ICE-CREAMS,Eggnog,51,0.10,8.80
+ICE-CREAMS,Elvis in White,44,0.10,0.02
+ICE-CREAMS,English Toffee Coffee,44,0.10,2.94
+ICE-CREAMS,Firecracker,44,0.10,0.76
+ICE-CREAMS,French Toast,37,0.10,7.08
+ICE-CREAMS,Fright Night,30,0.10,8.68
+ICE-CREAMS,Frog Pond,30,0.10,7.31
+ICE-CREAMS,Frog Tracks,51,0.10,8.42
+ICE-CREAMS,Fudge Swirl,51,0.10,9.47
+ICE-CREAMS,Georgia Peach,44,0.10,7.25
+ICE-CREAMS,Georgia Peach Cheesecake,58,0.10,6.53
+ICE-CREAMS,German Chocolate,51,0.10,5.99
+ICE-CREAMS,German Chocolate Cheesecake,37,0.10,5.54
+ICE-CREAMS,Ginger,51,0.10,4.50
+ICE-CREAMS,Gorilla Vanilla,37,0.10,8.54
+ICE-CREAMS,Grandma's Cookies,37,0.10,8.59
+ICE-CREAMS,Grape Escape,44,0.10,0.54
+ICE-CREAMS,Grape Nuts,51,0.10,2.87
+ICE-CREAMS,Green Tea,51,0.10,8.89
+ICE-CREAMS,Green Tree Frog,37,0.10,4.47
+ICE-CREAMS,Hazelnut Coffee,44,0.10,0.77
+ICE-CREAMS,Heath Bar,37,0.10,5.44
+ICE-CREAMS,Heath Bar Cheesecake,58,0.10,4.58
+ICE-CREAMS,Heavenly Hash,30,0.10,8.16
+ICE-CREAMS,Honey Cinnamon Graham,51,0.10,3.46
+ICE-CREAMS,Honey Cinnamon Oatmeal Cookie,44,0.10,8.60
+ICE-CREAMS,Honey Espresso,37,0.10,3.04
+ICE-CREAMS,Honey Vanilla,58,0.10,7.28
+ICE-CREAMS,Huckleberry,44,0.10,9.78
+ICE-CREAMS,Huckleberry Cheesecake,51,0.10,3.36
+ICE-CREAMS,Huckleberry Pie,30,0.10,2.74
+ICE-CREAMS,Hulk's Cream,37,0.10,6.33
+ICE-CREAMS,Irish Coffee,30,0.10,8.29
+ICE-CREAMS,Irish Cream,30,0.10,2.01
+ICE-CREAMS,Jack and Jill,30,0.10,4.70
+ICE-CREAMS,Jamaica Bay,30,0.10,1.41
+ICE-CREAMS,Key Lime Pie,58,0.10,4.30
+ICE-CREAMS,Lemon Blueberry Cheesecake,30,0.10,6.60
+ICE-CREAMS,Lemon Cheesecake,51,0.10,1.62
+ICE-CREAMS,Lemon Coconut,37,0.10,2.84
+ICE-CREAMS,Lemon Coconut Cheesecake,30,0.10,8.47
+ICE-CREAMS,Lemon Cr?me,44,0.10,1.32
+ICE-CREAMS,Lemon Pie,44,0.10,1.21
+ICE-CREAMS,Leprechan Mint,51,0.10,9.38
+ICE-CREAMS,Licorice,37,0.10,5.45
+ICE-CREAMS,M&M,37,0.10,7.50
+ICE-CREAMS,Mango,30,0.10,6.01
+ICE-CREAMS,Maple Pecan,37,0.10,5.10
+ICE-CREAMS,Maple Walnut,44,0.10,9.35
+ICE-CREAMS,Mexican Coffee,58,0.10,1.81
+ICE-CREAMS,Mint Chocolate Chip,58,0.10,1.47
+ICE-CREAMS,Mocha Almond Crunch,37,0.10,9.76
+ICE-CREAMS,Mocha Cappuccino Cheesecake,37,0.10,9.03
+ICE-CREAMS,Mocha Chocolate Chip Cheesecake,30,0.10,9.27
+ICE-CREAMS,Orange Cranberry,44,0.10,1.03
+ICE-CREAMS,Orange Dream,51,0.10,5.33
+ICE-CREAMS,Orange Pineapple Flip,58,0.10,2.05
+ICE-CREAMS,Oreo Fudge Cheesecake,30,0.10,2.98
+ICE-CREAMS,Oreo Mint,30,0.10,6.38
+ICE-CREAMS,Oreo Mint Cheesecake,30,0.10,5.74
+ICE-CREAMS,Paradise,44,0.10,1.51
+ICE-CREAMS,PB&J,58,0.10,2.75
+ICE-CREAMS,Peanut Butter Chip,44,0.10,0.06
+ICE-CREAMS,Peanut Butter Crunch,30,0.10,7.03
+ICE-CREAMS,Peanut Butter Cup,37,0.10,0.57
+ICE-CREAMS,Peanut Butter Cup Cheesecake,58,0.10,8.29
+ICE-CREAMS,Peanut Butter Fudge Cheesecake,51,0.10,7.38
+ICE-CREAMS,Peanut Butter Passion,58,0.10,6.82
+ICE-CREAMS,Peanut Butter/Banana,51,0.10,6.05
+ICE-CREAMS,Peppermint,51,0.10,5.76
+ICE-CREAMS,Peppermint Cheesecake,37,0.10,5.11
+ICE-CREAMS,Peppermint Twist,51,0.10,9.76
+ICE-CREAMS,Pina Colada,37,0.10,8.48
+ICE-CREAMS,Pineapple,44,0.10,8.61
+ICE-CREAMS,Pineapple Cheesecake,30,0.10,6.08
+ICE-CREAMS,Pistachio,37,0.10,9.72
+ICE-CREAMS,Pistachio Cheesecake,51,0.10,0.63
+ICE-CREAMS,Polar Bear Freeze,51,0.10,7.08
+ICE-CREAMS,Praline Cheesecake,30,0.10,3.59
+ICE-CREAMS,Pralines and Cream,37,0.10,6.44
+ICE-CREAMS,Princess Party,51,0.10,0.95
+ICE-CREAMS,Pumpkin,30,0.10,4.16
+ICE-CREAMS,Pumpkin Cheesecake,30,0.10,5.55
+ICE-CREAMS,Raspberry Chocolate Chocolate Chip,30,0.10,0.07
+ICE-CREAMS,Raspberry Chocolate Truffle,44,0.10,2.18
+ICE-CREAMS,Raspberry Morning,51,0.10,2.71
+ICE-CREAMS,Red Cream Soda,37,0.10,3.17
+ICE-CREAMS,Red Raspberry Rhapsody,37,0.10,1.28
+ICE-CREAMS,Red Velvet,58,0.10,3.00
+ICE-CREAMS,Reese's Pieces,44,0.10,3.07
+ICE-CREAMS,Rum Raisin,44,0.10,1.31
+ICE-CREAMS,Sasparilla Cream,51,0.10,7.69
+ICE-CREAMS,Sea Hunt,37,0.10,9.81
+ICE-CREAMS,Season's Greetings,30,0.10,3.58
+ICE-CREAMS,Smores,30,0.10,1.92
+ICE-CREAMS,Snickers,37,0.10,6.33
+ICE-CREAMS,Snickers Caramel Cheesecake,37,0.10,7.02
+ICE-CREAMS,Spumoni,37,0.10,7.07
+ICE-CREAMS,Strawberry,58,0.10,8.65
+ICE-CREAMS,Strawberry Cheesecake,58,0.10,6.82
+ICE-CREAMS,Strawberry Mango,44,0.10,8.43
+ICE-CREAMS,Strawberry Mango Cheesecake,30,0.10,6.17
+ICE-CREAMS,Strawberry Shortcake,30,0.10,6.89
+ICE-CREAMS,Tamarind,51,0.10,3.14
+ICE-CREAMS,The Strawberry Cake,37,0.10,8.78
+ICE-CREAMS,Thin Mint Girl Scout Cookie,58,0.10,3.36
+ICE-CREAMS,Tiramisu Toffee,51,0.10,0.58
+ICE-CREAMS,Tiramisu Toffee Cheesecake,51,0.10,8.80
+ICE-CREAMS,Vanilla,51,0.10,0.51
+ICE-CREAMS,Vanilla Bean,58,0.10,3.07
+ICE-CREAMS,Vanilla Bean Cheesecake,44,0.10,9.92
+ICE-CREAMS,Vanilla Chocolate Chip,44,0.10,3.88
+ICE-CREAMS,Vanilla Cookies & Cream,51,0.10,2.26
+ICE-CREAMS,Vanilla with Espresso Pillows,44,0.10,6.84
+ICE-CREAMS,Watermelon Man,30,0.10,9.28
+ICE-CREAMS,White Chocolate Macadamia Nut,58,0.10,3.62
+ICE-CREAMS,White Chocolate Macaroon,51,0.10,9.43
+ICE-CREAMS,White Chocolate Peanutbutter,51,0.10,0.67
+ICE-CREAMS,White Chocolate Peppermint,37,0.10,7.11
+ICE-CREAMS,White Chocolate Raspberry,44,0.10,6.59
+ICE-CREAMS,White Chocolate Raspberry Truffle,30,0.10,8.12
+ICE-CREAMS,White Chocolate Strawberry Cheesecake,30,0.10,3.31
+ICE-CREAMS,White Chocolate Turtle,44,0.10,3.08
+ICE-CREAMS,Wigglers and Stuff,58,0.10,2.12
+ICE-CREAMS,Wild Cherry,30,0.10,7.01
+ICE-CREAMS,Witergreen,51,0.10,8.77
+ICE-CREAMS,Wormy Apple,58,0.10,3.93

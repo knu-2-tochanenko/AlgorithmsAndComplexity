@@ -14,19 +14,15 @@ int MAX_NUMBER_OF_PRODUCTS = 3000;
 
 struct Category {
 	string name;
-	OBSTree* products;
+	PersistentSet* products;
 
 	Category(string name, int mode) {
 		this->name = name;
-		this->products = new OBSTree(mode);
+		this->products = new PersistentSet(mode);
 	}
 
 	void add(Product* product) {
 		this->products->addElement(product);
-	}
-
-	void build() {
-		this->products->build();
 	}
 };
 
@@ -55,17 +51,13 @@ public:
 			catalog[category[categoryProduct->category]]
 				->add(categoryProduct->product);
 		}
-
-		for (unsigned int i = 0; i < categoriesList.size(); i++) {
-			catalog[i]->build();
-		}
 	}
 
-	bool printProduct(string categoryName, Product* productToFind) {
+	bool printProduct(string categoryName, int iteration, Product* productToFind) {
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		int selectedCategory = category[categoryName];
 
-		Node* res = this->catalog[selectedCategory]->products->getElement(productToFind);
+		Node* res = this->catalog[selectedCategory]->products->getElement(iteration, productToFind);
 		if (!res) {
 			cout << "Oopsie\n";
 			return false;
@@ -100,26 +92,43 @@ public:
 		return true;
 	}
 
-	void printTrees(int mode) {
+	void printTrees() {
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		for (int i = 0; i < catalog.size(); i++) {
 			SetConsoleTextAttribute(hConsole, 10);
 			cout << "-------" << catalog[i]->name << "--------------------------------------------------\n";
 			SetConsoleTextAttribute(hConsole, 15);
-			catalog[i]->products->displayTree(mode);
+			catalog[i]->products->displayTree();
 			cout << "\n\n";
 		}
 	}
 
-	void printTree(string categoryName, int mode) {
-
+	void printTree(string categoryName) {
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		int selectedCategory = category[categoryName];
 
 		if (category.find(categoryName) != category.end()) {
 			cout << catalog[selectedCategory]->name << "\n";
-			catalog[selectedCategory]->products->displayTree(mode);
+			catalog[selectedCategory]->products->displayTree();
 			cout << "\n\n";
 		}
+	}
+
+	void printTree(string categoryName, int iteration) {
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		int selectedCategory = category[categoryName];
+
+		if (category.find(categoryName) != category.end()) {
+			cout << catalog[selectedCategory]->name << "\n";
+			catalog[selectedCategory]->products->displayTree(iteration);
+			cout << "\n\n";
+		}
+	}
+
+	int getNumberOfIterations(string categoryName) {
+		int selectedCategory = category[categoryName];
+		if (category.find(categoryName) != category.end())
+			return catalog[selectedCategory]->products->getNumberOfIterations();
+		else return 0;
 	}
 };

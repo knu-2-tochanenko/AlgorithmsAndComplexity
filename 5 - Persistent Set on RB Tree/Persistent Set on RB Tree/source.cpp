@@ -1,11 +1,11 @@
-#include "commandline.h"
 #include <iostream>
+#include "commandline.h"
 
 using namespace std;
 
 int main() {
-	CommandLine commandLine;
-	commandLine.run();
+	CommandLine cmd;
+	cmd.run();
 
 	system("pause");
 	return 0;
