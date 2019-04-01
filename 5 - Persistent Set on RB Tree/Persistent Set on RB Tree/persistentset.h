@@ -19,10 +19,6 @@ struct Node {
 	Node* right;
 	Node* parent;
 
-	double price() {
-		return this->key->price;
-	}
-
 	Node() = default;
 	Node(Color color, bool isNil, Product* key, Node* left, Node* right, Node* parent) {
 		this->color = color;
@@ -50,17 +46,15 @@ private:
 	Node* nil = new Node(black, true, NULL, NULL, NULL, NULL);
 	Node* head = new Node(black, false, NULL, nil, nil, nil);
 
-	int mode = 0;		//	1	:	Name
-						//	2	:	Days till expired
-						//	3	:	Weight
-						//	0..	:	Price
+	int mode = 0;
 
+	//	A vector of head for different iterations of set
 	vector<Node*> iterations;
 
 	/***
 		Compares two elements using specific mode
 		-1	- The first value is less than second
-		1	- The first value is bigger than second
+		1	- The first value is begger than second
 		0	- Values are even
 	//*/
 	int compare(Product* x, Product* y) {
@@ -97,7 +91,7 @@ private:
 	/***
 		Actually, rotates left
 	//*/
-	void rotateLeft(Node* node) {
+	void rotateLeft(int iteration, Node* node) {
 		Node* sub = node->right;
 		node->right = sub->left;
 
@@ -107,7 +101,7 @@ private:
 		sub->parent = node->parent;
 
 		if (node->parent == nil)
-			head = sub;
+			this->iterations[iteration] = sub;
 		else if (node == node->parent->left)
 			node->parent->left = sub;
 		else node->parent->right = sub;
@@ -119,7 +113,7 @@ private:
 	/***
 		Actually, rotates right
 	//*/
-	void rotateRight(Node* node) {
+	void rotateRight(int iteration, Node* node) {
 		Node* sub = node->left;
 		node->left = sub->right;
 
@@ -129,7 +123,7 @@ private:
 		sub->parent = node->parent;
 
 		if (node->parent == nil)
-			head = sub;
+			this->iterations[iteration] = sub;
 		else if (node == node->parent->right)
 			node->parent->right = sub;
 		else node->parent->left = sub;
@@ -141,7 +135,7 @@ private:
 	/***
 		The method which NEEDS to be executed after EACH element adding
 	//*/
-	void addNormalize(Node * node) {
+	void addNormalize(int iteration, Node * node) {
 		Node *sub;
 		while (node->parent->color == red) {
 			if (node->parent == node->parent->parent->left) {
@@ -155,11 +149,11 @@ private:
 				else {
 					if (node == node->parent->right) {
 						node = node->parent;
-						rotateLeft(node);
+						rotateLeft(iteration, node);
 					}
 					node->parent->color = black;
 					node->parent->parent->color = red;
-					rotateRight(node->parent->parent);
+					rotateRight(iteration, node->parent->parent);
 				}
 			}
 			else {
@@ -175,79 +169,28 @@ private:
 				else {
 					if (node == node->parent->left) {
 						node = node->parent;
-						rotateLeft(node);
+						rotateLeft(iteration, node);
 					}
 					node->parent->color = black;
 					node->parent->parent->color = red;
-					rotateRight(node->parent->parent);
+					rotateRight(iteration, node->parent->parent);
 				}
 			}
 		}
-		head->color = black;
-	}
-
-	/****
-		Function which saves current tree with new node as next iteration
-	//*/
-	void saveNext(Node * newHead, Node * node) {
-		if (node == newHead)
-			return;
-		Node *parent = node->parent;
-		if (node->parent == nil)
-			return;
-		Node* newParent = new Node(node->parent);
-		if (parent->left) {
-			parent->left->parent = newParent;
-			newParent->left = parent->left;
-		}
-		if (parent->right) {
-			parent->right->parent = newParent;
-			newParent->right = parent->right;
-		}
-
-		if (node == parent->left)
-			parent->left = nil;
-		else if (node == parent->right)
-			parent->right = nil;
-
-		while (parent != newHead) {
-			Node *grandparent = parent->parent;
-			Node *newGrandparent = new Node(grandparent);
-
-			if (grandparent->left == parent) {
-				newGrandparent->left = newParent;
-				if (grandparent->right != nil) {
-					newGrandparent->right = grandparent->right;
-					newGrandparent->right->parent = newGrandparent;
-				}
-			}
-
-			else {
-				newGrandparent->right = newParent;
-				if (grandparent->left != nil) {
-					newGrandparent->left = grandparent->left;
-					newGrandparent->left->parent = newGrandparent;
-				}
-			}
-
-			newParent->parent = newGrandparent;
-			parent = parent->parent;
-			newParent = newParent->parent;
-		}
-		this->head = newParent;
+		this->iterations[iteration]->color = black;
 	}
 
 	/***
 		Method which is used to go through the whole tree
 	//*/
-	Node* getElement(Node* node, Product* toFind) {
-		int compareResult = compare(node->key, toFind);
+	Node* getElement(Node* node, Product* product) {
+		int compareResult = compare(node->key, product);
 		if (compareResult == 0)
 			return node;
 		else if (compareResult > 0 && node->left != nil)
-			return getElement(node->left, toFind);
+			return getElement(node->left, product);
 		else if (compareResult < 0 && node->right != nil)
-			return getElement(node->right, toFind);
+			return getElement(node->right, product);
 		else
 			return new Node(black, false, new Product("UNDEFINED", 0, 0.0, 0.0), nil, nil, nil);
 	}
@@ -264,7 +207,7 @@ private:
 		SetConsoleTextAttribute(hConsole, colorMode);
 		for (int i = 0; i < tabs; i++)
 			cout << "\t";
-		cout << node->key->name << " - ";
+		cout << node->key->name;
 
 		switch (mode) {
 		case 1:
@@ -292,7 +235,7 @@ private:
 	void displayNode(Node* node, int colorMode) {
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		SetConsoleTextAttribute(hConsole, colorMode);
-		printf("%.2f", node->price());
+		cout << node->key->name;
 		if (node->left != nil || node->right != nil)
 			cout << " { ";
 		if (node->left != nil)
@@ -308,56 +251,83 @@ private:
 	}
 
 	/***
-		This function is needed for adding new node and saving previous tree
-		to the iterations vector
+		Methods which is used to copy all sons for current node
 	//*/
-	void insertAndSave(Product* product) {
-		Node* node = new Node(red, false, product, nil, nil, nil);
-		this->head = insertElement(this->head, node);
-		saveNext(this->head, node);
-		insertElement(this->head, node);
-		iterations.push_back(this->head);
+	void copySons(Node* copyTo, Node* copyFrom) {
+		if (copyFrom->left != nil) {
+			copyTo = new Node(copyFrom->left);
+			copySons(copyTo->left, copyFrom->left);
+		}
+		if (copyFrom->right != nil) {
+			copyTo = new Node(copyFrom->right);
+			copySons(copyTo->right, copyFrom->right);
+		}
 	}
 
 	/***
-		Methods which is used to add new node to the tree.
-		Returns pointer to head of the new tree
+		Methods which is used to add new node to the tree
 	//*/
-	Node* insertElement(Node* currentHead, Node * node) {
-		if (currentHead->key == NULL) {
-			currentHead = node;
-			return currentHead;
+	void addElement(int iteration, Product* product) {
+		Node* node = new Node(red, false, product, nil, nil, nil);
+
+		if (this->iterations[iteration]->key == NULL) {
+			this->iterations[iteration] = node;
+			return;
 		}
 
-		Node *sub = nil, *point = currentHead;
+		//	Find place to insert new node
+		Node *sub = nil, *point = this->iterations[iteration];
 		while (point != nil) {
 			sub = point;
-			if (compare(node->key, point->key) > 0)
+			if (compare(node->key, point->key) < 0)
 				point = point->left;
 			else
 				point = point->right;
 		}
 
-		node->parent = sub;
+		/***
+			Now we need to copy current node (sub),
+			all of it's sons and it's father, grandfather,
+			and other grand-grand fathers to the head of the tree
+		//*/
 
-		if (sub == nil)
-			currentHead = node;
-		else if (compare(node->key, sub->key) > 0)
-			sub->left = node;
+		//	Copy nodes from current node to the head
+		Node* NEWCurrentNode = new Node(sub);
+		Node* NEWcopiedNode = NEWCurrentNode;
+		Node* nodeFromPreviousTree = sub;
+		while (nodeFromPreviousTree->parent != nil) {
+			NEWcopiedNode->parent = new Node(nodeFromPreviousTree->parent);
+			
+			//	Connect parent to current node
+			if (nodeFromPreviousTree->parent->right == nodeFromPreviousTree)
+				NEWcopiedNode->parent->right = NEWcopiedNode;
+			else
+				NEWcopiedNode->parent->left = NEWcopiedNode;
+
+			NEWcopiedNode = NEWcopiedNode->parent;
+			nodeFromPreviousTree = nodeFromPreviousTree->parent;
+		}
+
+		Node* NEWhead = NEWcopiedNode;
+
+		// Copy sons
+		copySons(NEWCurrentNode, sub);
+
+		//	Evertything is copied and we need to insert new node
+		node->parent = NEWCurrentNode;
+
+		if (NEWCurrentNode == nil)
+			NEWhead = node;
+		else if (compare(node->key, NEWCurrentNode->key) < 0)
+			NEWCurrentNode->left = node;
 		else
-			sub->right = node;
+			NEWCurrentNode->right = node;
 
 		node->left = nil;
 		node->right = nil;
 
-		addNormalize(node);
-
-		/*Node* added = node->parent;
-		while (!added->isNil) {
-			added = added->parent;
-		}
-		*/
-		return currentHead;
+		this->iterations.push_back(NEWhead);
+		addNormalize(iteration + 1, node);
 	}
 
 public:
@@ -370,41 +340,41 @@ public:
 		nil->right = nil;
 		nil->parent = nil;
 		this->mode = mode;
+		this->iterations.push_back(head);
 	}
 
 	/***
-		Method which is used to get element with specific key (by rank)
+		Method which is used to get element
 	//*/
-	Node* getElement(int iteration, Product* node) {
-		if (iteration > this->iterations.size() || iteration <= 0)
-			cout << "There are only " << this->iterations.size() << " iterations!\n";
-		return getElement(this->iterations[iteration - 1], node);
+	Node* getElement(int iteration, Product* product) {
+		return getElement(this->iterations[iteration], product);
 	}
 
 	/***
 		Methods which is used to add new node to the tree
 	//*/
 	void addElement(Product* product) {
-		insertAndSave(product);
+		int iteration = this->iterations.size() - 1;
+		addElement(iteration < 0 ? 0 : iteration, product);
 	}
 
 	/***
-		Displays full trees list
+		Displays full tree list
 	//*/
-	void displayTree() {
+	void displayTrees() {
 		int numberOfIterations = this->iterations.size();
-		for (int i = 1; i <= numberOfIterations; i++) {
+		for (int i = 0; i < numberOfIterations; i++)
 			displayTree(i);
-		}
 	}
 
 	/***
-		Displays single tree
+		Displays single tree iteration
 	//*/
 	void displayTree(int iteration) {
+		// TODO :: Number of iterations!!!
 		cout << "ITERATION " << iteration << endl;
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-		displayNodeFancy(this->iterations[iteration - 1], 4, 9);
+		displayNodeFancy(this->iterations[iteration], 4, 9);
 		SetConsoleTextAttribute(hConsole, 15);
 	}
 

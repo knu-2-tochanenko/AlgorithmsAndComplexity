@@ -98,7 +98,7 @@ public:
 			SetConsoleTextAttribute(hConsole, 10);
 			cout << "-------" << catalog[i]->name << "--------------------------------------------------\n";
 			SetConsoleTextAttribute(hConsole, 15);
-			catalog[i]->products->displayTree();
+			catalog[i]->products->displayTrees();
 			cout << "\n\n";
 		}
 	}
@@ -109,7 +109,7 @@ public:
 
 		if (category.find(categoryName) != category.end()) {
 			cout << catalog[selectedCategory]->name << "\n";
-			catalog[selectedCategory]->products->displayTree();
+			catalog[selectedCategory]->products->displayTrees();
 			cout << "\n\n";
 		}
 	}
