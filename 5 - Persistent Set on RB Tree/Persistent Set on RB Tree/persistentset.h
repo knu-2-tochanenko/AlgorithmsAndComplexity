@@ -136,7 +136,6 @@ private:
 	/***
 		The method which NEEDS to be executed after EACH element adding
 	//*/
-	
 	void addNormalize(int iteration, Node * node) {
 		Node *sub;
 		while (node->parent->color == red) {
@@ -183,8 +182,6 @@ private:
 		}
 		this->iterations[iteration]->color = black;
 	}
-	
-	
 
 	/***
 		Displays individual node (using fancy colors) (and fancy structure)
@@ -196,24 +193,11 @@ private:
 		SetConsoleTextAttribute(hConsole, colorMode);
 		if (node->right != nil)
 			displayNodeFancy(node->right, tabs + 1, colorMode == 15 ? 9 : colorMode + 1);
-		else {
+		else
 			cout << endl;
-			SetConsoleTextAttribute(hConsole, colorMode == 15 ? 9 : colorMode + 1);
-			for (int i = 0; i <= tabs; i++)
-				cout << "\t";
-			if (nil->color == black)
-				cout << "B ";
-			else
-				cout << "R ";
-			cout << "nil\n";
-		}
 		SetConsoleTextAttribute(hConsole, colorMode);
 		for (int i = 0; i < tabs; i++)
 			cout << "\t";
-		if (node->color == black)
-			cout << "B ";
-		else
-			cout << "R ";
 		cout << node->key->name;
 		
 		switch (mode) {
@@ -232,21 +216,10 @@ private:
 
 		if (node->left != nil)
 			displayNodeFancy(node->left, tabs + 1, colorMode == 15 ? 9 : colorMode + 1);
-		else {
-			SetConsoleTextAttribute(hConsole, colorMode == 15 ? 9 : colorMode + 1);
+		else
 			cout << endl;
-			for (int i = 0; i <= tabs; i++)
-				cout << "\t";
-			if (nil->color == black)
-				cout << "B ";
-			else
-				cout << "R ";
-			cout << "nil\n";
-		}
 		SetConsoleTextAttribute(hConsole, colorMode);
 	}
-
-	//	Can I copy your homework?
 
 	/***
 		Displays individual node (using fancy colors)
@@ -296,7 +269,6 @@ private:
 	/***
 		Methods which is used to add new node to the tree
 	//*/
-	//***
 	void addElement(int iteration, Product* product) {
 		Node* node = new Node(red, false, product, nil, nil, nil);
 
@@ -366,67 +338,7 @@ private:
 		}
 
 		addNormalize(iteration, node);
-
-		displayTree(iteration);
 	}
-	//*/
-	/***
-	void addElement(int iteration, Product* product) {
-		Node* old_root = this->iterations[iteration];
-		Node* key = new Node(red, false, product, nil, nil, nil);
-		this->iterations.push_back(old_root);
-		if (this->iterations[iteration]->key == NULL)
-		{
-			this->iterations[iteration] = new Node(key);
-			this->iterations[iteration]->parent = nil;
-			this->iterations[iteration]->color = black;
-			return;
-		}
-		Node* inserted = this->iterations[iteration];
-		Node* parent_node = this->iterations[iteration];
-		Node* copy_node = old_root;
-		bool finded_parent = false;
-		while (!finded_parent)
-		{
-			if (compare(product, parent_node->key) < 0)
-			{
-				if (parent_node->left != nil)
-				{
-					copy_node->left = new Node(parent_node->left);
-					parent_node = parent_node->left;
-					copy_node->left->parent = copy_node;
-					copy_node = copy_node->left;
-				}
-				else
-				{
-					inserted = key;
-					inserted->parent = parent_node;
-					parent_node->left = inserted;
-					finded_parent = true;
-				}
-			}
-			else
-			{
-				if (parent_node->right != nil)
-				{
-					copy_node->right = new Node(parent_node->right);
-					parent_node = parent_node->right;
-					copy_node->right->parent = copy_node;
-					copy_node = copy_node->right;
-				}
-				else
-				{
-					inserted = key;
-					inserted->parent = parent_node;
-					parent_node->right = inserted;
-					finded_parent = true;
-				}
-			}
-		}
-		iteration++;
-		addNormalize(iteration, inserted);
-	}
-	//*/
 
 public:
 	/***
