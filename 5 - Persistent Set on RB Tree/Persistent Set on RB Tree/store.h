@@ -57,6 +57,13 @@ public:
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		int selectedCategory = category[categoryName];
 
+		int numberOfIterations = this->catalog[selectedCategory]->products->getNumberOfIterations();
+
+		if (iteration < 0)
+			iteration = 0;
+		if (iteration >= numberOfIterations)
+			iteration = numberOfIterations - 1;
+
 		Node* res = this->catalog[selectedCategory]->products->getElement(iteration, productToFind);
 		if (!res) {
 			cout << "Oopsie\n";
@@ -117,6 +124,13 @@ public:
 	void printTree(string categoryName, int iteration) {
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		int selectedCategory = category[categoryName];
+
+		int numberOfIterations = this->catalog[selectedCategory]->products->getNumberOfIterations();
+
+		if (iteration < 0)
+			iteration = 0;
+		if (iteration >= numberOfIterations)
+			iteration = numberOfIterations - 1;
 
 		if (category.find(categoryName) != category.end()) {
 			cout << catalog[selectedCategory]->name << "\n";

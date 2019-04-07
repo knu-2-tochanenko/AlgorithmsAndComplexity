@@ -87,51 +87,57 @@ public:
 			cin >> category;
 
 			string command;
-			cout << "command [print, find] :  ";
+			cout << "command [print, printall, find] :  ";
 			cin >> command;
 
-			int iteration;
-			cout << "iteration [1.." << store.getNumberOfIterations(category) << "] :  ";
-			cin >> iteration;
-
-			if (command == "print") {
-				store.printTree(category, iteration);
-			}
-			else if (command == "find") {
-				cout << "value   :  ";
-				int integer;
-				double dbl;
-				string str;
-
-				//	1	:	Name
-				//	2	:	Days till expired
-				//	3	:	Weight
-				//	0..	:	Price
-
-				if (mode == 1) {
-					cin >> str;
-					if (!store.printProduct(category, iteration, new Product(str, 0, 0, 0))) {
-						break;
-					}
-				}
-				else if (mode == 2) {
-					cin >> integer;
-					if (!store.printProduct(category, iteration, new Product("", integer, 0, 0)))
-						continue;
-				}
-				else if (mode == 3) {
-					cin >> dbl;
-					if (!store.printProduct(category, iteration, new Product("", 0, dbl, 0)))
-						continue;
-				}
-				else {
-					cin >> dbl;
-					if (!store.printProduct(category, iteration, new Product("", 0, 0, dbl)))
-						continue;
-				}
+			if (command == "printall") {
+				store.printTree(category);
 			}
 			else {
-				cout << "U r dumbo\nThere is no command " << command << endl;
+
+				int iteration;
+				cout << "iteration [0.." << store.getNumberOfIterations(category) - 1 << "] :  ";
+				cin >> iteration;
+
+				if (command == "print") {
+					store.printTree(category, iteration);
+				}
+				else if (command == "find") {
+					cout << "value   :  ";
+					int integer;
+					double dbl;
+					string str;
+
+					//	1	:	Name
+					//	2	:	Days till expired
+					//	3	:	Weight
+					//	0..	:	Price
+
+					if (mode == 1) {
+						cin >> str;
+						if (!store.printProduct(category, iteration, new Product(str, 0, 0, 0))) {
+							break;
+						}
+					}
+					else if (mode == 2) {
+						cin >> integer;
+						if (!store.printProduct(category, iteration, new Product("", integer, 0, 0)))
+							continue;
+					}
+					else if (mode == 3) {
+						cin >> dbl;
+						if (!store.printProduct(category, iteration, new Product("", 0, dbl, 0)))
+							continue;
+					}
+					else {
+						cin >> dbl;
+						if (!store.printProduct(category, iteration, new Product("", 0, 0, dbl)))
+							continue;
+					}
+				}
+				else {
+					cout << "U r dumbo\nThere is no command " << command << endl;
+				}
 			}
 		}
 	}
