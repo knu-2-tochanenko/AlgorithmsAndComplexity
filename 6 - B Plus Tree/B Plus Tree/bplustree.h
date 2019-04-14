@@ -153,15 +153,15 @@ private:
 			middle++;
 		Node* newNode = new Node();
 		if (father->products.size() > 0) {
-			int needPos = binarySearch(father, node->products[middle]);
+			int newPosition = binarySearch(father, node->products[middle]);
 			father->products.push_back(NULL);
 			father->children.push_back(NULL);
-			for (int i = father->products.size() - 1; i > needPos + 1; i--) {
+			for (int i = father->products.size() - 1; i > newPosition + 1; i--) {
 				father->products[i] = father->products[i - 1];
 				father->children[i + 1] = father->children[i];
 			}
-			father->products[needPos + 1] = node->products[middle];
-			father->children[needPos + 2] = newNode;
+			father->products[newPosition + 1] = node->products[middle];
+			father->children[newPosition + 2] = newNode;
 		}
 		else {
 			father->products.push_back(node->products[middle]);
