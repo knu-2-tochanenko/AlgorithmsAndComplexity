@@ -113,53 +113,56 @@ private:
 		}
 	}
 
+	Node* unite(Node* node, Node* sibbling) {
+
+	}
+
 	/***
 		Function which is needed for almost every operation on Binomial Heap
 	//*/
 	Node* merge(Node* first, Node* second) {
 		if (first == NULL)
 			return second;
-		if (second == NULL)
+		else if (second == NULL)
 			return first;
 
-		Node* newTree = new Node();
-		Node* curNew = newTree;
-		Node* curF = first;
-		Node* curS = second;
-		while (curF != NULL && curS != NULL)
-			if (curF->degree < curS->degree) {
-				curNew->sibbling = curF;
-				curNew = curF;
-				curF = curF->sibbling;
+		Node* newNode, *sub;
+		if (first->degree > second->degree) {
+			newNode = second;
+			sub = newNode;
+			second = second->sibbling;
+		}
+		else {
+			sub = newNode = first;
+			first = first->sibbling;
+		}
+
+		while (first != NULL && second != NULL)
+			if (first->degree < second->degree) {
+				sub->sibbling = first;
+				sub = first;
+				first = first->sibbling;
 			}
 			else {
-				curNew->sibbling = curS;
-				curNew = curS;
-				curS = curS->sibbling;
-			}
-		if (curF == NULL)
-			while (curS != NULL) {
-				curNew->sibbling = curS;
-				curS = curS->sibbling;
-			}
-		else
-			while (curF != NULL) {
-				curNew->sibbling = curF;
-				curF = curF->sibbling;
+				sub->sibbling = second;
+				sub = second;
+				second = second->sibbling;
 			}
 
-		curNew = newTree;
-		while (curNew->sibbling != NULL) {
-			if (curNew->degree == curNew->sibbling->degree) {
-				curNew->parent = curNew->sibbling;
-				Node* temp = curNew->sibbling;
-				curNew->sibbling = curNew->sibbling->child;
-				curNew = temp;
-				continue;
-			}
-			curNew = curNew->sibbling;
+		while (first != NULL) {
+			sub->sibbling = first;
+			sub = first;
+			first = first->sibbling;
 		}
-		return newTree;
+		while (second != NULL) {
+			sub->sibbling = second;
+			sub = second;
+			second = second->sibbling;
+		}
+
+		newNode = makeUnion(newNode);
+
+		return newNode;
 	}
 
 	/***
