@@ -15,20 +15,28 @@ struct Node {
 	Node* sibbling;
 	int degree;
 
-	Node() = default;
+	Node() {
+		this->product = NULL;
+		this->parent = NULL;
+		this->child = NULL;
+		this->sibbling = NULL;
+		this->degree = 0;
+	}
+
 	Node(Product* product) {
 		this->product = product;
 		this->parent = NULL;
 		this->child = NULL;
 		this->sibbling = NULL;
-		this->degree = -1;
+		this->degree = 0;
 	}
 };
 
 class BinomialHeap {
 private:
 	int mode = 0;
-	vector<Node*> heads;
+	Node* minimumHead;
+
 	/***
 		Compares two elements using specific mode
 		-1	- The first value is less than second
@@ -86,35 +94,68 @@ private:
 		cout << endl;
 	}
 
-	Node* getMinimum() {
-		int headsCount = this->heads.size();
-		if (headsCount == 0)
-			return NULL;
-		Node* min = this->heads[0];
-		for (int i = 1; i < headsCount; i++)
-			if (compare(this->heads[i]->product, min->product) == -1)
-				min = this->heads[i];
-		return min;
-	}
-
-	Node* removeMinimum(Node* head) {
-		//	TODO :: Write a function
-		Node* min = getMinimum();
-		
-		Node* x = NULL;
-		Node* beforeX = NULL;
-		Node* curX = head;
-		Node* beforeCurX = NULL;
-
-		while (curX != NULL) {
-			if (compare(curX->product, min->product) == -1) {
-
+	pair<Node*, Node*> getMinimum() {
+		if (minimumHead != NULL)
+			return { NULL, NULL };
+		Node * sub = minimumHead->sibbling,
+			*foundNode = minimumHead,
+			*leftSibbling = minimumHead,
+			*leftFoundSibbling = NULL;
+		Product * minimumElement = minimumHead->product;
+		while (sub != NULL) {
+			if (compare(sub->product, minimumElement) == -1) {
+				minimumElement = sub->product;
+				leftFoundSibbling = leftSibbling;
+				foundNode = sub;
 			}
+			leftSibbling = sub;
+			sub = sub->sibbling;
 		}
+		return { foundNode, leftFoundSibbling };
 	}
 
-	Node* unite(Node* node, Node* sibbling) {
-
+	Node* unite(Node* node, Node* sibbling = NULL) {
+		if (node == NULL || node->sibbling == NULL)
+			return node;
+		Node * rightSibbling = node->sibbling;
+		while ((rightSibbling != NULL) && node->degree == rightSibbling->degree) {
+			if (compare(node->product, rightSibbling->product) <= 0) {
+				node->sibbling = rightSibbling->sibbling;
+				rightSibbling->sibbling = node->child;
+				node->child = rightSibbling;
+				rightSibbling->parent = node;
+				(node->degree)++;
+			}
+			else {
+				node->sibbling = rightSibbling->child;
+				rightSibbling->child = node;
+				node->parent = rightSibbling;
+				if (sibbling != NULL)
+					sibbling->sibbling = rightSibbling;
+				(rightSibbling->degree)++;
+				node = rightSibbling;
+			}
+			if (node->sibbling) {
+				Node* sub = node, * leftSubSibbling = sibbling, * rightSubSibbling = sub->sibbling;
+				bool ifChanged = false;
+				while (rightSubSibbling && sub->degree > rightSubSibbling->degree) {
+					if (leftSubSibbling != NULL)
+						leftSubSibbling->sibbling = rightSubSibbling;
+					if (ifChanged) {
+						node = rightSubSibbling;
+						ifChanged = true;
+					}
+					sub->sibbling = rightSubSibbling->sibbling;
+					rightSubSibbling->sibbling = sub;
+					leftSubSibbling = sub;
+					sub = rightSubSibbling;
+					rightSubSibbling = rightSubSibbling->sibbling;
+				}
+			}
+			rightSibbling = node->sibbling;
+		}
+		unite(node->sibbling, node);
+		return node;
 	}
 
 	/***
@@ -126,7 +167,7 @@ private:
 		else if (second == NULL)
 			return first;
 
-		Node* newNode, *sub;
+		Node * newNode, *sub;
 		if (first->degree > second->degree) {
 			newNode = second;
 			sub = newNode;
@@ -160,7 +201,7 @@ private:
 			second = second->sibbling;
 		}
 
-		newNode = makeUnion(newNode);
+		newNode = unite(newNode);
 
 		return newNode;
 	}
@@ -169,26 +210,38 @@ private:
 		Displays individual node (using fancy colors) (and fancy structure)
 	//*/
 	void displayNodeFancy(Node* node, int tabs, int colorMode) {
-		//	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-		//	colorMode == 15 ? 9 : colorMode + 1
-		//	SetConsoleTextAttribute(hConsole, colorMode);
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		Node* child = node->child;
-		if (node->child != NULL) {
+		while (child) {
 			SetConsoleTextAttribute(hConsole, colorMode);
-			displayNodeFancy(node->child, tabs + 1, colorMode == 15 ? 9 : colorMode + 1);
+			displayNodeFancy(child, tabs + 1, colorMode == 15 ? 9 : colorMode + 1);
 			SetConsoleTextAttribute(hConsole, colorMode);
-			cout << '\n';
-			printSingle(node->product, tabs);
+			child = child->sibbling;
 		}
-		if (node->lefaa) {
-			SetConsoleTextAttribute(hConsole, colorMode);
-			for (int i = 0; i < node->products.size(); i++) {
-				for (int j = 0; j < tabs; j++)
-					cout << "\t";
-				printSingle(node->products[i]);
-			}
-		}
+		for (int i = 0; i < tabs; i++)
+			cout << "\t";
 		SetConsoleTextAttribute(hConsole, colorMode);
+		cout << node->product->name << "\n";
+	}
+
+	pair<Node*, Node*> findMin() {
+		if (minimumHead == NULL)
+			return { NULL, NULL };
+		Node* sub = minimumHead->sibbling,
+			* foundNode = minimumHead,
+			* leftSibbling = minimumHead,
+			* leftSubSibbling = NULL;
+		Product* minimumElement = minimumHead->product;
+		while (sub != NULL) {
+			if (compare(sub->product, minimumElement) == -1) {
+				minimumElement = sub->product;
+				leftSubSibbling = leftSibbling;
+				foundNode = sub;
+			}
+			leftSibbling = sub;
+			sub = sub->sibbling;
+		}
+		return { foundNode, leftSubSibbling };
 	}
 
 public:
@@ -199,15 +252,46 @@ public:
 	/***
 		Method which is used to get element
 	//*/
-	Product* getElement(Product* product) {
+	Product* getElement(Product * product) {
+		Node* minNode = findMin().first;
+		if (minNode != NULL)
+			return minNode->product;
+		else
+			return NULL;
+	}
 
+	void removeElement() {
+		if (!minimumHead)
+			return;
+		pair<Node*, Node*> minNode = findMin();
+		Node* foundNode = minNode.first,
+			* leftSibbling = minNode.second;
+
+		if (minimumHead == foundNode)
+			minimumHead = minimumHead->sibbling;
+		else
+			leftSibbling->sibbling = foundNode->sibbling;
+
+		Node *newTree, *sub, *subsub = foundNode->child;
+		while (subsub) {
+			subsub->parent = NULL;
+			sub = subsub->sibbling;
+			if (newTree)
+				subsub->sibbling = newTree;
+			else
+				subsub->sibbling = NULL;
+			newTree = subsub;
+			subsub = sub;
+		}
+		minimumHead = merge(minimumHead, newTree);
 	}
 
 	/***
 		Method which is used to add new node to the tree
 	//*/
-	void addElement(Product* product) {
-
+	void addElement(Product * product) {
+		Node* newNode = new Node(product);
+		minimumHead = merge(minimumHead, newNode);
 	}
 
 	/***
@@ -215,7 +299,7 @@ public:
 	//*/
 	void displayTree(int mode) {
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-		displayNodeFancy(head, 1, 9);
+		displayNodeFancy(minimumHead, 1, 9);
 		SetConsoleTextAttribute(hConsole, 15);
 	}
 };

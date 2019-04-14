@@ -100,9 +100,9 @@ public:
 				}
 				else if (command == "find") {
 					cout << "value   :  ";
-					int integer;
-					double dbl;
-					string str;
+					int integer = 0;
+					double dbl = 0.0;
+					string str = "";
 
 					//	1	:	Name
 					//	2	:	Days till expired
@@ -110,23 +110,23 @@ public:
 					//	0..	:	Price
 
 					if (mode == 1) {
-						cin >> str;
+						//cin >> str;
 						if (!store.printProduct(category, new Product(str, 0, 0, 0))) {
 							break;
 						}
 					}
 					else if (mode == 2) {
-						cin >> integer;
+						//cin >> integer;
 						if (!store.printProduct(category, new Product("", integer, 0, 0)))
 							continue;
 					}
 					else if (mode == 3) {
-						cin >> dbl;
+						//cin >> dbl;
 						if (!store.printProduct(category, new Product("", 0, dbl, 0)))
 							continue;
 					}
 					else {
-						cin >> dbl;
+						//cin >> dbl;
 						if (!store.printProduct(category, new Product("", 0, 0, dbl)))
 							continue;
 					}

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "bplustree.h"
+#include "binomialheap.h"
 #include "datafile.h"
 
 #include <iostream>
@@ -14,11 +14,11 @@ int MAX_NUMBER_OF_PRODUCTS = 3000;
 
 struct Category {
 	string name;
-	BPlusTree* products;
+	BinomialHeap* products;
 
 	Category(string name, int mode) {
 		this->name = name;
-		this->products = new BPlusTree(mode);
+		this->products = new BinomialHeap(mode);
 	}
 
 	void add(Product* product) {
