@@ -53,45 +53,6 @@ public:
 		}
 	}
 
-	bool printProduct(string categoryName, Product* productToFind) {
-		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-		int selectedCategory = category[categoryName];
-
-		Product* res = this->catalog[selectedCategory]->products->getElement(productToFind);
-		if (!res) {
-			cout << "Oopsie\n";
-			return false;
-		}
-		Product* selectedProduct = res;
-		if ((selectedProduct != NULL) && (category.find(categoryName) != category.end())) {
-			SetConsoleTextAttribute(hConsole, 10);
-			cout << "------------------\nNAME     :  ";
-			SetConsoleTextAttribute(hConsole, 11);
-			cout << selectedProduct->name << "\n";
-			SetConsoleTextAttribute(hConsole, 10);
-			cout << "expdate  :  ";
-			SetConsoleTextAttribute(hConsole, 15);
-			cout << selectedProduct->daysTillExpired << "\n";
-			SetConsoleTextAttribute(hConsole, 10);
-			cout << "weight   :  ";
-			SetConsoleTextAttribute(hConsole, 15);
-			cout << selectedProduct->weight << " kg\n";
-			SetConsoleTextAttribute(hConsole, 10);
-			cout << "cost     :  ";
-			SetConsoleTextAttribute(hConsole, 15);
-			printf("$%.2f\n", selectedProduct->price);
-			SetConsoleTextAttribute(hConsole, 10);
-			cout << "------------------\n";
-		}
-		else {
-			SetConsoleTextAttribute(hConsole, 12);
-			cout << "The inputed number is too high!\n";
-			SetConsoleTextAttribute(hConsole, 15);
-		}
-
-		return true;
-	}
-
 	void printTree(string categoryName, int mode) {
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 		int selectedCategory = category[categoryName];
@@ -103,9 +64,48 @@ public:
 		}
 	}
 
+	void deleteMinimum(string categoryName, int mode) {
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		int selectedCategory = category[categoryName];
+
+		if (category.find(categoryName) != category.end()) {
+			catalog[selectedCategory]->products->removeElement();
+		}
+	}
+
+	void showMinimum(string categoryName, int mode) {
+		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+		int selectedCategory = category[categoryName];
+
+		if (category.find(categoryName) != category.end()) {
+			Product* selectedProduct = catalog[selectedCategory]->products->getElement();
+
+			if (selectedProduct != NULL) {
+				SetConsoleTextAttribute(hConsole, 10);
+				cout << "------------------\nNAME     :  ";
+				SetConsoleTextAttribute(hConsole, 11);
+				cout << selectedProduct->name << "\n";
+				SetConsoleTextAttribute(hConsole, 10);
+				cout << "expdate  :  ";
+				SetConsoleTextAttribute(hConsole, 15);
+				cout << selectedProduct->daysTillExpired << "\n";
+				SetConsoleTextAttribute(hConsole, 10);
+				cout << "weight   :  ";
+				SetConsoleTextAttribute(hConsole, 15);
+				cout << selectedProduct->weight << " kg\n";
+				SetConsoleTextAttribute(hConsole, 10);
+				cout << "cost     :  ";
+				SetConsoleTextAttribute(hConsole, 15);
+				printf("$%.2f\n", selectedProduct->price);
+				SetConsoleTextAttribute(hConsole, 10);
+				cout << "------------------\n";
+			}
+		}
+	}
+
 	void printTrees(int mode) {
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-		for (int i = 0; i < catalog.size(); i++) {
+		for (unsigned int i = 0; i < catalog.size(); i++) {
 			SetConsoleTextAttribute(hConsole, 10);
 			cout << "-------" << catalog[i]->name << "--------------------------------------------------\n";
 			SetConsoleTextAttribute(hConsole, 15);

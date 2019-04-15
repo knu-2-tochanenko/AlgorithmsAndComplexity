@@ -87,53 +87,20 @@ public:
 			cin >> category;
 
 			string command;
-			cout << "command [print, find] :  ";
+			cout << "command [print, delete, show] :  ";
 			cin >> command;
 
-			if (command == "printall") {
+			if (command == "delete") {
+				store.deleteMinimum(category, mode);
+			}
+			else if (command == "print") {
 				store.printTree(category, mode);
 			}
+			else if (command == "show") {
+				store.showMinimum(category, mode);
+			}
 			else {
-
-				if (command == "print") {
-					store.printTree(category, mode);
-				}
-				else if (command == "find") {
-					cout << "value   :  ";
-					int integer = 0;
-					double dbl = 0.0;
-					string str = "";
-
-					//	1	:	Name
-					//	2	:	Days till expired
-					//	3	:	Weight
-					//	0..	:	Price
-
-					if (mode == 1) {
-						//cin >> str;
-						if (!store.printProduct(category, new Product(str, 0, 0, 0))) {
-							break;
-						}
-					}
-					else if (mode == 2) {
-						//cin >> integer;
-						if (!store.printProduct(category, new Product("", integer, 0, 0)))
-							continue;
-					}
-					else if (mode == 3) {
-						//cin >> dbl;
-						if (!store.printProduct(category, new Product("", 0, dbl, 0)))
-							continue;
-					}
-					else {
-						//cin >> dbl;
-						if (!store.printProduct(category, new Product("", 0, 0, dbl)))
-							continue;
-					}
-				}
-				else {
-					cout << "U r dumbo\nThere is no command " << command << endl;
-				}
+				cout << "U r dumbo\nThere is no command " << command << endl;
 			}
 		}
 	}

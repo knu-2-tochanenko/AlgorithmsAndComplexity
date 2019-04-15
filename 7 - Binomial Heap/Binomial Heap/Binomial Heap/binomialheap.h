@@ -252,7 +252,7 @@ public:
 	/***
 		Method which is used to get element
 	//*/
-	Product* getElement(Product * product) {
+	Product* getElement() {
 		Node* minNode = findMin().first;
 		if (minNode != NULL)
 			return minNode->product;
@@ -272,7 +272,9 @@ public:
 		else
 			leftSibbling->sibbling = foundNode->sibbling;
 
-		Node *newTree, *sub, *subsub = foundNode->child;
+		Node* newTree = NULL,
+			* sub = NULL,
+			* subsub = foundNode->child;
 		while (subsub) {
 			subsub->parent = NULL;
 			sub = subsub->sibbling;
@@ -299,7 +301,12 @@ public:
 	//*/
 	void displayTree(int mode) {
 		HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-		displayNodeFancy(minimumHead, 1, 9);
+		Node* sub = minimumHead;
+		while (sub != NULL) {
+			displayNodeFancy(sub, 1, 9);
+			sub = sub->sibbling;
+			cout << endl;
+		}
 		SetConsoleTextAttribute(hConsole, 15);
 	}
 };

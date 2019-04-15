@@ -23,10 +23,10 @@
     <ClInclude Include="datafile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="binomialheap.h">
+    <ClInclude Include="store.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="store.h">
+    <ClInclude Include="binomialheap.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="commandline.h">
