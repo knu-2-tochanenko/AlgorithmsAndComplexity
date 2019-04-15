@@ -77,7 +77,7 @@ private:
 	void printSingle(Product* product, int tabs) {
 		for (int i = 0; i < tabs; i++)
 			cout << "\t";
-		cout << product->name << " - ";
+		cout << product->name;
 		switch (mode) {
 		case 1:
 			break;
@@ -218,10 +218,8 @@ private:
 			SetConsoleTextAttribute(hConsole, colorMode);
 			child = child->sibbling;
 		}
-		for (int i = 0; i < tabs; i++)
-			cout << "\t";
 		SetConsoleTextAttribute(hConsole, colorMode);
-		cout << node->product->name << "\n";
+		printSingle(node->product, tabs);
 	}
 
 	pair<Node*, Node*> findMin() {

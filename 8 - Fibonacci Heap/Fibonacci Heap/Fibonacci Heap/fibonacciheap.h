@@ -81,7 +81,7 @@ private:
 	void printSingle(Product* product, int tabs) {
 		for (int i = 0; i < tabs; i++)
 			cout << "\t";
-		cout << product->name << " - ";
+		cout << product->name;
 		switch (mode) {
 		case 1:
 			break;
@@ -185,9 +185,8 @@ private:
 			displayNodeFancy(child, tabs + 1, colorMode == 15 ? 9 : colorMode + 1);
 			SetConsoleTextAttribute(hConsole, colorMode);
 		}
-		for (int i = 0; i < tabs; i++)
-			cout << "\t";
-		cout << left << node->product->name << "\n";
+		SetConsoleTextAttribute(hConsole, colorMode);
+		printSingle(node->product, tabs);
 	}
 
 public:
